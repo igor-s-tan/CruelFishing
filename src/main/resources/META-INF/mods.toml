@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="Cock and ball torture license"
+
+[[mods]]
+
+modId="cruelfishing"
+
+version="0.0.1"
+
+displayName="Cruel Fishing"
+logoFile="${mod_icon}"
+authors="igorstan"
+
+description='''
+Enter the World of Fish and become who you were meant to be.
+'''
+
+[[dependencies.cruelfishing]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.cruelfishing]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
