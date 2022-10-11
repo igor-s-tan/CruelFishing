@@ -1,6 +1,8 @@
 modLoader="javafml"
 loaderVersion="[36,)"
-license="Cock and ball torture license"
+license="CBT license"
+logoFile="Figure_1.png"
+
 
 [[mods]]
 
@@ -9,7 +11,7 @@ modId="cruelfishing"
 version="0.0.1"
 
 displayName="Cruel Fishing"
-logoFile="${mod_icon}"
+
 authors="igorstan"
 
 description='''

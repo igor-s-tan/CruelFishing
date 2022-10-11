@@ -1,44 +1,101 @@
 {
-  "minecraft:recipes/food/cooked_cod_from_campfire_cooking": {
+  "minecraft:story/lava_bucket": {
     "criteria": {
-      "has_cod": "2022-07-24 18:11:58 +0300"
+      "lava_bucket": "2022-10-12 00:05:27 +0300"
     },
     "done": true
   },
-  "minecraft:husbandry/balanced_diet": {
+  "minecraft:recipes/decorations/scaffolding": {
     "criteria": {
-      "cod": "2022-07-24 18:12:02 +0300"
-    },
-    "done": false
-  },
-  "minecraft:recipes/food/cooked_cod_from_smoking": {
-    "criteria": {
-      "has_cod": "2022-07-24 18:11:58 +0300"
+      "has_bamboo": "2022-10-09 18:16:18 +0300"
     },
     "done": true
   },
-  "minecraft:husbandry/root": {
+  "minecraft:recipes/transportation/dark_oak_boat": {
     "criteria": {
-      "consumed_item": "2022-07-24 18:12:02 +0300"
+      "in_water": "2022-10-09 20:46:15 +0300"
     },
     "done": true
   },
-  "minecraft:recipes/food/cooked_cod": {
+  "minecraft:recipes/transportation/birch_boat": {
     "criteria": {
-      "has_cod": "2022-07-24 18:11:58 +0300"
+      "in_water": "2022-10-09 20:46:15 +0300"
     },
     "done": true
   },
   "minecraft:husbandry/fishy_business": {
     "criteria": {
-      "cod": "2022-07-24 18:11:58 +0300"
+      "cod": "2022-10-09 18:17:00 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/red_dye_from_poppy": {
+    "criteria": {
+      "has_red_flower": "2022-10-11 22:33:33 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "in_water": "2022-10-09 20:46:15 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/oak_boat": {
+    "criteria": {
+      "in_water": "2022-10-09 20:46:15 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_cod_from_campfire_cooking": {
+    "criteria": {
+      "has_cod": "2022-10-09 18:17:00 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_cod_from_smoking": {
+    "criteria": {
+      "has_cod": "2022-10-09 18:17:00 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_cod": {
+    "criteria": {
+      "has_cod": "2022-10-09 18:17:00 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "in_water": "2022-10-09 20:46:15 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/yellow_dye_from_dandelion": {
+    "criteria": {
+      "has_yellow_flower": "2022-10-12 00:10:59 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/stick_from_bamboo_item": {
+    "criteria": {
+      "has_bamboo": "2022-10-09 18:16:18 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "in_water": "2022-10-09 20:46:15 +0300"
     },
     "done": true
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:forest": "2022-07-24 17:44:08 +0300",
-      "minecraft:wooded_hills": "2022-07-24 18:11:32 +0300"
+      "minecraft:jungle": "2022-10-09 16:45:28 +0300",
+      "minecraft:bamboo_jungle": "2022-10-09 16:45:59 +0300",
+      "minecraft:beach": "2022-10-09 18:16:20 +0300",
+      "minecraft:river": "2022-10-09 23:33:03 +0300",
+      "minecraft:bamboo_jungle_hills": "2022-10-09 16:46:00 +0300"
     },
     "done": false
   },
