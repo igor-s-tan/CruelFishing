@@ -1,0 +1,16 @@
+{
+  "pools": [
+    {
+      "name": "cruel_fishing",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "cruelfishing:gameplay/cruel_fishing/fish",
+          "weight": 100,
+          "quality": 1
+        }
+      ]
+    }
+  ]
+}
