@@ -1,6 +1,0 @@
-{
-  "parent": "cruelfishing:item/fiberglass_fishing_rod",
-  "textures": {
-    "layer0": "cruelfishing:item/fiberglass_fishing_rod_cast"
-  }
-}

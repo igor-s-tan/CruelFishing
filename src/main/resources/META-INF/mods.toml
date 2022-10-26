@@ -3,19 +3,14 @@ loaderVersion="[36,)"
 license="CBT license"
 logoFile="Figure_1.png"
 
-
 [[mods]]
-
 modId="cruelfishing"
-
-version="0.0.1"
-
+version="0.2"
 displayName="Cruel Fishing"
-
 authors="igorstan"
 
 description='''
-Enter the World of Fish and become who you were meant to be.
+Enter the world of fish and become who you were meant to be.
 '''
 
 [[dependencies.cruelfishing]]

@@ -1,5 +1,6 @@
 {
   "item.cruelfishing.fiberglass_fishing_rod": "Fiberglass Fishing Rod",
-  "fluid.cruelfishing.oil" : "Demonic Broth",
-  "item.cruelfishing.oil_bucket" : "Demonic Broth Bucket"
+  "fluid.cruelfishing.corrupted_water" : "Corrupted Water",
+  "item.cruelfishing.corrupted_water_bucket" : "Corrupted Water Bucket",
+  "itemGroup.CruelFishingTab" : "Cruel Fishing"
 }
