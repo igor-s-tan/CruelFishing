@@ -2,6 +2,8 @@ package com.igorstan.cruelfishing.init;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
 import com.igorstan.cruelfishing.entity.FiberglassFishingBobberEntity;
+import com.igorstan.cruelfishing.entity.fish.FleshratFishEntity;
+import com.igorstan.cruelfishing.entity.fish.model.FleshratFishModel;
 import com.igorstan.cruelfishing.registry.RegistryNames;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.Entity;
@@ -36,6 +38,18 @@ public class CruelEntities {
                     .setTrackingRange(64)
                     .immuneToFire()
                     .setUpdateInterval(5));
+
+    public static final EntityType<FleshratFishEntity> FLESHRAT_FISH_ENTITY =
+            register(RegistryNames.FLESHRAT_FISH, EntityType.Builder.<FleshratFishEntity>create(
+                    FleshratFishEntity::new, EntityClassification.WATER_CREATURE)
+                    .size(0.5f, 0.5f)
+                    .disableSerialization()
+                    .disableSummoning()
+                    .setShouldReceiveVelocityUpdates(true)
+                    .immuneToFire()
+                    .setUpdateInterval(1)
+                    .setTrackingRange(64));
+
 
     public static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
         ResourceLocation location = new ResourceLocation(CruelFishingMod.MODID, name);

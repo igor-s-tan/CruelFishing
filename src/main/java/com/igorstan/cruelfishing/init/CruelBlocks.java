@@ -17,5 +17,4 @@ public class CruelBlocks {
 
     @ObjectHolder(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_BLOCK)
     public static final FlowingFluidBlock CORRUPTED_WATER_BLOCK = null;
-
 }

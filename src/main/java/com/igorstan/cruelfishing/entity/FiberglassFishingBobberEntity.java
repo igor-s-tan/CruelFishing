@@ -1,15 +1,16 @@
 package com.igorstan.cruelfishing.entity;
 
 import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import javax.annotation.Nonnull;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
+import com.igorstan.cruelfishing.entity.fish.FleshratFishEntity;
+import com.igorstan.cruelfishing.fluid.CorruptedWaterFluid;
 import com.igorstan.cruelfishing.init.CruelEntities;
+import com.igorstan.cruelfishing.init.CruelFluids;
 import com.igorstan.cruelfishing.item.FiberglassFishingRodItem;
+import com.igorstan.cruelfishing.registry.RegistryNames;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,20 +18,26 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -39,11 +46,9 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -437,19 +442,44 @@ public class FiberglassFishingBobberEntity extends FishingBobberEntity {
                 }
                 CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)playerentity, p_146034_1_, this, list);
 
-                for(ItemStack itemstack : list) {
-                    ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), itemstack);
-                    double d0 = playerentity.getPosX() - this.getPosX();
-                    double d1 = playerentity.getPosY() - this.getPosY();
-                    double d2 = playerentity.getPosZ() - this.getPosZ();
-                    double d3 = 0.1D;
-                    itementity.setMotion(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
-                    this.world.addEntity(itementity);
-                    playerentity.world.addEntity(new ExperienceOrbEntity(playerentity.world, playerentity.getPosX(), playerentity.getPosY() + 0.5D, playerentity.getPosZ() + 0.5D, this.rand.nextInt(6) + 1));
-                    if (itemstack.getItem().isIn(ItemTags.FISHES)) {
-                        playerentity.addStat(Stats.FISH_CAUGHT, 1);
+                FluidState fluidState = this.world.getFluidState(this.getPosition());
+                String name = fluidState.getFluid().getRegistryName().toString();
+                System.out.println(name);
+//                if(name.equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)) {
+                    for(ItemStack itemstack : list) {
+                        EntityType<? extends FleshratFishEntity> entityType = CruelEntities.FLESHRAT_FISH_ENTITY;
+                        Entity entity = entityType.spawn(((ServerWorld) this.world).getWorld(), itemstack, playerentity, this.getPosition().add(0, 0.5, 0), SpawnReason.MOB_SUMMONED, false, false);
+                        entity.setInvulnerable(true);
+                        entity.noClip = true;
+                        entity.setNoGravity(true);
+//                        new java.util.Timer().schedule(
+//                                new java.util.TimerTask() {
+//                                    @Override
+//                                    public void run() {
+//                                        ((ServerWorld) world).removeEntity(entity);
+//                                    }
+//                                },
+//                                10000
+//                        );
+
+
                     }
-                }
+//                } else {
+//                    for (ItemStack itemstack : list) {
+//                        ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), itemstack);
+//                        double d0 = playerentity.getPosX() - this.getPosX();
+//                        double d1 = playerentity.getPosY() - this.getPosY();
+//                        double d2 = playerentity.getPosZ() - this.getPosZ();
+//                        double d3 = 0.1D;
+//                        itementity.setMotion(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
+//                        this.world.addEntity(itementity);
+//                        playerentity.world.addEntity(new ExperienceOrbEntity(playerentity.world, playerentity.getPosX(), playerentity.getPosY() + 0.5D, playerentity.getPosZ() + 0.5D, this.rand.nextInt(6) + 1));
+//                        if (itemstack.getItem().isIn(ItemTags.FISHES)) {
+//                            playerentity.addStat(Stats.FISH_CAUGHT, 1);
+//                        }
+//                    }
+//                }
+
 
                 i = 1;
             }

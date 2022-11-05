@@ -12,6 +12,11 @@ public class RegistryNames {
     public static final String CORRUPTED_WATER_FLOWING = "corrupted_water_flowing";
     public static final String CORRUPTED_WATER_BUCKET = "corrupted_water_bucket";
 
+    // Stock Market Tablet
+    public static final String STOCK_MARKET_TABLET = "stock_market_tablet";
+    public static final String STOCK_MARKET_TABLET_CONTAINER = "stock_market_tablet_container";
+    public static final String STOCK_MARKET_TABLET_DISPLAY_NAME = "Stock Market";
+
     // Fish names
     public static final String FLESHRAT_FISH = "fleshrat_fish";
     public static final String CIVILIAN_FISH = "civilian_fish";

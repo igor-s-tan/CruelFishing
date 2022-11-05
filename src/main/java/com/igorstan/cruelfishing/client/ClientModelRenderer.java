@@ -1,15 +1,25 @@
 package com.igorstan.cruelfishing.client;
 
+import com.igorstan.cruelfishing.CruelFishingMod;
+import com.igorstan.cruelfishing.container.StockMarketTabletContainer;
 import com.igorstan.cruelfishing.init.CruelEntities;
 import com.igorstan.cruelfishing.init.CruelItems;
+import com.igorstan.cruelfishing.registry.RegistryNames;
 import net.minecraft.client.renderer.entity.FishRenderer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.FishingRodItem;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
-public class ClientRenderer {
+public class ClientModelRenderer {
 
     public static void register() {
         RenderingRegistry.registerEntityRenderingHandler(CruelEntities.FIBERGLASS_BOBBER,

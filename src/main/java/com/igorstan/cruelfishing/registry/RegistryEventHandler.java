@@ -2,20 +2,34 @@ package com.igorstan.cruelfishing.registry;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
 import com.igorstan.cruelfishing.block.CorruptedWaterBlock;
+import com.igorstan.cruelfishing.container.StockMarketTabletContainer;
+import com.igorstan.cruelfishing.entity.fish.FleshratFishEntity;
 import com.igorstan.cruelfishing.fluid.CorruptedWaterFluid;
-import com.igorstan.cruelfishing.init.CruelBlocks;
 import com.igorstan.cruelfishing.init.CruelEntities;
 import com.igorstan.cruelfishing.init.CruelItems;
-import com.igorstan.cruelfishing.item.FiberglassFishingRodItem;
+import com.igorstan.cruelfishing.playerdata.IStockMarket;
+import com.igorstan.cruelfishing.playerdata.StockMarket;
+import com.igorstan.cruelfishing.playerdata.StockMarketCapabilityProvider;
+import com.igorstan.cruelfishing.playerdata.StockMarketServerPacket;
 import net.minecraft.block.Block;
-import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.fluid.FlowingFluid;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
 @Mod.EventBusSubscriber(
         bus = Mod.EventBusSubscriber.Bus.MOD
@@ -29,6 +43,8 @@ public class RegistryEventHandler {
         evt.getRegistry().registerAll(
                 CruelItems.FIBERGLASS_FISHING_ROD,
                 CruelItems.CORRUPTED_WATER_BUCKET,
+
+                CruelItems.STOCK_MARKET_TABLET,
 
                 CruelItems.FLESHRAT_FISH,
                 CruelItems.CIVILIAN_FISH,
@@ -107,7 +123,10 @@ public class RegistryEventHandler {
 
     @SubscribeEvent
     public static void onEntityRegistry(RegistryEvent.Register<EntityType<?>> evt) {
-        evt.getRegistry().registerAll(CruelEntities.FIBERGLASS_BOBBER);
+        evt.getRegistry().registerAll(
+                CruelEntities.FIBERGLASS_BOBBER,
+                CruelEntities.FLESHRAT_FISH_ENTITY
+        );
     }
 
     @SubscribeEvent
@@ -121,4 +140,53 @@ public class RegistryEventHandler {
         evt.getRegistry().registerAll(new CorruptedWaterBlock().setRegistryName(RegistryNames.CORRUPTED_WATER_BLOCK));
     }
 
+
+    @SubscribeEvent
+    public static void addEntityAttributes(EntityAttributeCreationEvent evt) {
+        evt.put(CruelEntities.FLESHRAT_FISH_ENTITY, FleshratFishEntity.setCustomAttributes().create());
+    }
+
+    public static final ResourceLocation FLESHRAT_AMOUNT = new ResourceLocation(CruelFishingMod.MODID, RegistryNames.FLESHRAT_FISH);
+    @SubscribeEvent
+    public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
+        if(event.getObject() instanceof PlayerEntity) {
+            event.addCapability(FLESHRAT_AMOUNT, new StockMarketCapabilityProvider());
+        }
+    }
+
+    @SubscribeEvent
+    public void clone(PlayerEvent.Clone event) {
+        IStockMarket original = event.getOriginal().getCapability(StockMarketCapabilityProvider.capability, null).orElseGet(StockMarket::new);
+        IStockMarket clone = event.getEntity().getCapability(StockMarketCapabilityProvider.capability, null).orElseGet(StockMarket::new);
+        clone.setFishAmount(RegistryNames.FLESHRAT_FISH, original.getFishAmount(RegistryNames.FLESHRAT_FISH));
+        syncPacket(event.getEntity(), clone);
+    }
+
+    @SubscribeEvent
+    public void onPlayerLoggedInSyncPoints(PlayerEvent.PlayerLoggedInEvent event) {
+        PlayerEntity player = event.getPlayer();
+        IStockMarket points = player.getCapability(StockMarketCapabilityProvider.capability).orElseGet(StockMarket::new);
+        syncPacket(event.getEntity(), points);
+    }
+
+    @SubscribeEvent
+    public void onPlayerRespawnedSyncPlayerVariables(PlayerEvent.PlayerRespawnEvent event) {
+        PlayerEntity player = event.getPlayer();
+        IStockMarket points = player.getCapability(StockMarketCapabilityProvider.capability).orElseGet(StockMarket::new);
+        syncPacket(event.getEntity(), points);
+    }
+
+    @SubscribeEvent
+    public void onPlayerChangedDimensionSyncPlayerVariables(PlayerEvent.PlayerChangedDimensionEvent event) {
+        PlayerEntity player = event.getPlayer();
+        IStockMarket points = player.getCapability(StockMarketCapabilityProvider.capability).orElseGet(StockMarket::new);
+        syncPacket(event.getEntity(), points);
+    }
+
+    private void syncPacket(Entity entity, IStockMarket points){
+        if (entity instanceof ServerPlayerEntity) {
+            ServerPlayerEntity player = (ServerPlayerEntity) entity;
+            new StockMarketServerPacket(points.getFishAmount(RegistryNames.FLESHRAT_FISH)).sendToPlayer(player);
+        }
+    }
 }
