@@ -15,7 +15,7 @@ public class RegistryNames {
     // Stock Market Tablet
     public static final String STOCK_MARKET_TABLET = "stock_market_tablet";
     public static final String STOCK_MARKET_TABLET_CONTAINER = "stock_market_tablet_container";
-    public static final String STOCK_MARKET_TABLET_DISPLAY_NAME = "Stock Market";
+    public static final String STOCK_MARKET_TABLET_DISPLAY_NAME = "";
 
     // Fish names
     public static final String FLESHRAT_FISH = "fleshrat_fish";

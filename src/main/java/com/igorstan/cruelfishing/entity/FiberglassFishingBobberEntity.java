@@ -444,7 +444,6 @@ public class FiberglassFishingBobberEntity extends FishingBobberEntity {
 
                 FluidState fluidState = this.world.getFluidState(this.getPosition());
                 String name = fluidState.getFluid().getRegistryName().toString();
-                System.out.println(name);
 //                if(name.equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)) {
                     for(ItemStack itemstack : list) {
                         EntityType<? extends FleshratFishEntity> entityType = CruelEntities.FLESHRAT_FISH_ENTITY;

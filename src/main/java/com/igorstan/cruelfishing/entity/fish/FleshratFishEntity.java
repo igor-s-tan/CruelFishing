@@ -4,6 +4,7 @@ import com.igorstan.cruelfishing.playerdata.IStockMarket;
 import com.igorstan.cruelfishing.playerdata.StockMarket;
 import com.igorstan.cruelfishing.playerdata.StockMarketCapabilityProvider;
 import com.igorstan.cruelfishing.registry.RegistryNames;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -22,8 +23,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class FleshratFishEntity extends MobEntity {
-
-
 
     public FleshratFishEntity(EntityType<? extends MobEntity> type, World worldIn) {
         super(type, worldIn);
@@ -51,13 +50,13 @@ public class FleshratFishEntity extends MobEntity {
     }
 
     private void checkPlayer(@Nonnull PlayerEntity playerEntity) {
-        if(getDistance(playerEntity.getEntity()) <= 0.9f) {
+        if(getDistance(playerEntity.getEntity()) <= 1.1f) {
             this.setDead();
             CompoundNBT nbt = playerEntity.getPersistentData();
             IStockMarket iStockMarket = playerEntity.getCapability(StockMarketCapabilityProvider.capability).orElseGet(StockMarket::new);
             iStockMarket.addFish(RegistryNames.FLESHRAT_FISH, 1);
-            nbt.putInt(RegistryNames.FLESHRAT_FISH, 1);
-
+            nbt.putInt(RegistryNames.FLESHRAT_FISH, iStockMarket.getFishAmount(RegistryNames.FLESHRAT_FISH) + 1);
+            nbt.putBoolean(RegistryNames.FLESHRAT_FISH, true);
         }
     }
 }

@@ -21,8 +21,10 @@ public class ClientContainerRegistry {
     public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> evt) {
         IForgeRegistry<ContainerType<?>> registry = evt.getRegistry();
         registry.register(IForgeContainerType.create(((windowId, inv, data) ->
-                new StockMarketTabletContainer(windowId, inv, inv.player))).setRegistryName(RegistryNames.STOCK_MARKET_TABLET_CONTAINER));
+                new StockMarketTabletContainer(windowId, inv.player))).setRegistryName(RegistryNames.STOCK_MARKET_TABLET_CONTAINER));
     }
+
+
     @ObjectHolder(CruelFishingMod.MODID + ":" + RegistryNames.STOCK_MARKET_TABLET_CONTAINER)
     public static ContainerType<StockMarketTabletContainer> stockMarketTabletContainerContainerType;
 }

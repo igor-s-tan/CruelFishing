@@ -1,7 +1,6 @@
 package com.igorstan.cruelfishing.client;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
-import com.igorstan.cruelfishing.container.StockMarketTabletContainer;
 import com.igorstan.cruelfishing.init.CruelEntities;
 import com.igorstan.cruelfishing.init.CruelItems;
 import com.igorstan.cruelfishing.registry.RegistryNames;

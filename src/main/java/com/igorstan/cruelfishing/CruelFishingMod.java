@@ -1,8 +1,9 @@
 package com.igorstan.cruelfishing;
 
+
 import com.igorstan.cruelfishing.client.ClientContainerRegistry;
 import com.igorstan.cruelfishing.client.ClientModelRenderer;
-import com.igorstan.cruelfishing.container.StockMarketTabletContainerScreen;
+import com.igorstan.cruelfishing.container.StockMarketTabletScreen;
 import com.igorstan.cruelfishing.entity.fish.render.FleshratFishModelRenderer;
 import com.igorstan.cruelfishing.init.CruelEntities;
 import com.igorstan.cruelfishing.init.CruelItems;
@@ -68,8 +69,7 @@ public class CruelFishingMod
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         ClientModelRenderer.register();
-        ScreenManager.registerFactory(ClientContainerRegistry.stockMarketTabletContainerContainerType, StockMarketTabletContainerScreen::new);
-
+        ScreenManager.registerFactory(ClientContainerRegistry.stockMarketTabletContainerContainerType, StockMarketTabletScreen::new);
         RenderingRegistry.registerEntityRenderingHandler(CruelEntities.FLESHRAT_FISH_ENTITY, FleshratFishModelRenderer::new);
     }
 

@@ -2,7 +2,7 @@ package com.igorstan.cruelfishing.registry;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
 import com.igorstan.cruelfishing.block.CorruptedWaterBlock;
-import com.igorstan.cruelfishing.container.StockMarketTabletContainer;
+import com.igorstan.cruelfishing.container.StockMarketTabletScreen;
 import com.igorstan.cruelfishing.entity.fish.FleshratFishEntity;
 import com.igorstan.cruelfishing.fluid.CorruptedWaterFluid;
 import com.igorstan.cruelfishing.init.CruelEntities;
@@ -10,8 +10,8 @@ import com.igorstan.cruelfishing.init.CruelItems;
 import com.igorstan.cruelfishing.playerdata.IStockMarket;
 import com.igorstan.cruelfishing.playerdata.StockMarket;
 import com.igorstan.cruelfishing.playerdata.StockMarketCapabilityProvider;
-import com.igorstan.cruelfishing.playerdata.StockMarketServerPacket;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -151,42 +151,6 @@ public class RegistryEventHandler {
     public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
         if(event.getObject() instanceof PlayerEntity) {
             event.addCapability(FLESHRAT_AMOUNT, new StockMarketCapabilityProvider());
-        }
-    }
-
-    @SubscribeEvent
-    public void clone(PlayerEvent.Clone event) {
-        IStockMarket original = event.getOriginal().getCapability(StockMarketCapabilityProvider.capability, null).orElseGet(StockMarket::new);
-        IStockMarket clone = event.getEntity().getCapability(StockMarketCapabilityProvider.capability, null).orElseGet(StockMarket::new);
-        clone.setFishAmount(RegistryNames.FLESHRAT_FISH, original.getFishAmount(RegistryNames.FLESHRAT_FISH));
-        syncPacket(event.getEntity(), clone);
-    }
-
-    @SubscribeEvent
-    public void onPlayerLoggedInSyncPoints(PlayerEvent.PlayerLoggedInEvent event) {
-        PlayerEntity player = event.getPlayer();
-        IStockMarket points = player.getCapability(StockMarketCapabilityProvider.capability).orElseGet(StockMarket::new);
-        syncPacket(event.getEntity(), points);
-    }
-
-    @SubscribeEvent
-    public void onPlayerRespawnedSyncPlayerVariables(PlayerEvent.PlayerRespawnEvent event) {
-        PlayerEntity player = event.getPlayer();
-        IStockMarket points = player.getCapability(StockMarketCapabilityProvider.capability).orElseGet(StockMarket::new);
-        syncPacket(event.getEntity(), points);
-    }
-
-    @SubscribeEvent
-    public void onPlayerChangedDimensionSyncPlayerVariables(PlayerEvent.PlayerChangedDimensionEvent event) {
-        PlayerEntity player = event.getPlayer();
-        IStockMarket points = player.getCapability(StockMarketCapabilityProvider.capability).orElseGet(StockMarket::new);
-        syncPacket(event.getEntity(), points);
-    }
-
-    private void syncPacket(Entity entity, IStockMarket points){
-        if (entity instanceof ServerPlayerEntity) {
-            ServerPlayerEntity player = (ServerPlayerEntity) entity;
-            new StockMarketServerPacket(points.getFishAmount(RegistryNames.FLESHRAT_FISH)).sendToPlayer(player);
         }
     }
 }
