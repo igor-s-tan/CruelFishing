@@ -12,9 +12,6 @@ import javax.annotation.Nullable;
 
 public class StockMarketCapabilityProvider implements ICapabilitySerializable<INBT> {
 
-    private static final String NBT = "nbt_";
-
-
     @CapabilityInject(IStockMarket.class)
     public static Capability<IStockMarket> capability = null;
     private LazyOptional<IStockMarket> instance = LazyOptional.of(capability::getDefaultInstance);

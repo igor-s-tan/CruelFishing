@@ -1,12 +1,12 @@
 {
   "pools": [
     {
-      "name": "cruel_fishing",
+      "name": "demonic_broth_loot_table",
       "rolls": 1,
       "entries": [
         {
           "type": "loot_table",
-          "name": "cruelfishing:gameplay/cruel_fishing/fish",
+          "name": "cruelfishing:demonic_broth_loot_table/fish",
           "weight": 100,
           "quality": 1
         }

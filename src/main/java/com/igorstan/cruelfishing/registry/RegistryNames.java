@@ -12,6 +12,15 @@ public class RegistryNames {
     public static final String CORRUPTED_WATER_FLOWING = "corrupted_water_flowing";
     public static final String CORRUPTED_WATER_BUCKET = "corrupted_water_bucket";
 
+    // Demonic Broth
+
+    public static final String DEMONIC_BROTH_BLOCK = "demonic_broth_block";
+    public static final String DEMONIC_BROTH_FLUID = "demonic_broth_fluid";
+    public static final String DEMONIC_BROTH_FLOWING = "demonic_broth_flowing";
+    public static final String DEMONIC_BROTH_BUCKET = "demonic_broth_bucket";
+    public static final String DEMONIC_BROTH_LOOT_TABLE = "demonic_broth_loot_table";
+
+
     // Stock Market Tablet
     public static final String STOCK_MARKET_TABLET = "stock_market_tablet";
     public static final String STOCK_MARKET_TABLET_CONTAINER = "stock_market_tablet_container";

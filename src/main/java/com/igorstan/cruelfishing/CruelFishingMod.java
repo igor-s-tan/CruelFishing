@@ -4,6 +4,7 @@ package com.igorstan.cruelfishing;
 import com.igorstan.cruelfishing.client.ClientContainerRegistry;
 import com.igorstan.cruelfishing.client.ClientModelRenderer;
 import com.igorstan.cruelfishing.container.StockMarketTabletScreen;
+import com.igorstan.cruelfishing.entity.display.TextDisplay;
 import com.igorstan.cruelfishing.entity.fish.render.FleshratFishModelRenderer;
 import com.igorstan.cruelfishing.init.CruelEntities;
 import com.igorstan.cruelfishing.init.CruelItems;
@@ -16,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -71,6 +73,7 @@ public class CruelFishingMod
         ClientModelRenderer.register();
         ScreenManager.registerFactory(ClientContainerRegistry.stockMarketTabletContainerContainerType, StockMarketTabletScreen::new);
         RenderingRegistry.registerEntityRenderingHandler(CruelEntities.FLESHRAT_FISH_ENTITY, FleshratFishModelRenderer::new);
+        MinecraftForge.EVENT_BUS.register(new TextDisplay());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -84,4 +87,5 @@ public class CruelFishingMod
                 map(m->m.getMessageSupplier().get()).
                 collect(Collectors.toList()));
     }
+
 }

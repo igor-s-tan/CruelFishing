@@ -19,4 +19,10 @@ public class CruelFluids {
     @ObjectHolder(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLOWING)
     public static final FlowingFluid CORRUPTED_WATER_FLOWING = null;
 
+    @ObjectHolder(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLUID)
+    public static final FlowingFluid DEMONIC_BROTH_FLUID = null;
+
+    @ObjectHolder(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLOWING)
+    public static final FlowingFluid DEMONIC_BROTH_FLOWING = null;
+
 }

@@ -3,12 +3,9 @@ package com.igorstan.cruelfishing.entity;
 import java.lang.reflect.Field;
 import java.util.*;
 import javax.annotation.Nonnull;
-
 import com.igorstan.cruelfishing.CruelFishingMod;
 import com.igorstan.cruelfishing.entity.fish.FleshratFishEntity;
-import com.igorstan.cruelfishing.fluid.CorruptedWaterFluid;
 import com.igorstan.cruelfishing.init.CruelEntities;
-import com.igorstan.cruelfishing.init.CruelFluids;
 import com.igorstan.cruelfishing.item.FiberglassFishingRodItem;
 import com.igorstan.cruelfishing.registry.RegistryNames;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -21,23 +18,18 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -46,7 +38,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
@@ -432,52 +424,65 @@ public class FiberglassFishingBobberEntity extends FishingBobberEntity {
             } else if (this.ticksCatchable > 0) {
                 LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.field_237457_g_, this.getPositionVec()).withParameter(LootParameters.TOOL, p_146034_1_).withParameter(LootParameters.THIS_ENTITY, this).withRandom(this.rand).withLuck((float)this.luck + playerentity.getLuck());
                 lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, Objects.requireNonNull(this.func_234616_v_())).withParameter(LootParameters.THIS_ENTITY, this);
-                LootTable loottable = Objects.requireNonNull(this.world.getServer()).getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING);
-                List<ItemStack> list = loottable.generate(lootcontext$builder.build(LootParameterSets.FISHING));
-                event = new net.minecraftforge.event.entity.player.ItemFishedEvent(list, this.onGround ? 2 : 1, this);
+
+                ResourceLocation BROTH_LOOT_TABLE = new ResourceLocation(CruelFishingMod.MODID, RegistryNames.DEMONIC_BROTH_LOOT_TABLE);
+
+                LootTable lootTableVanilla = Objects.requireNonNull(this.world.getServer()).getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING);
+                List<ItemStack> listVanilla = lootTableVanilla.generate(lootcontext$builder.build(LootParameterSets.FISHING));
+
+                LootTable lootTableBroth = Objects.requireNonNull(this.world.getServer()).getLootTableManager().getLootTableFromLocation(BROTH_LOOT_TABLE);
+                List<ItemStack> listBroth = lootTableBroth.generate(lootcontext$builder.build(LootParameterSets.FISHING));
+
+                event = new net.minecraftforge.event.entity.player.ItemFishedEvent(listVanilla, this.onGround ? 2 : 1, this);
                 net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
                 if (event.isCanceled()) {
                     this.remove();
                     return event.getRodDamage();
                 }
-                CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)playerentity, p_146034_1_, this, list);
+                CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)playerentity, p_146034_1_, this, listVanilla);
 
-                FluidState fluidState = this.world.getFluidState(this.getPosition());
-                String name = fluidState.getFluid().getRegistryName().toString();
-//                if(name.equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)) {
-                    for(ItemStack itemstack : list) {
+                FluidState fluidState1 = this.world.getFluidState(this.getPosition().down());
+                FluidState fluidState2 = this.world.getFluidState(this.getPosition());
+                if(fluidState1.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)
+                || fluidState2.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)) {
+                    for (ItemStack itemstack : listVanilla) {
                         EntityType<? extends FleshratFishEntity> entityType = CruelEntities.FLESHRAT_FISH_ENTITY;
                         Entity entity = entityType.spawn(((ServerWorld) this.world).getWorld(), itemstack, playerentity, this.getPosition().add(0, 0.5, 0), SpawnReason.MOB_SUMMONED, false, false);
                         entity.setInvulnerable(true);
                         entity.noClip = true;
                         entity.setNoGravity(true);
-//                        new java.util.Timer().schedule(
-//                                new java.util.TimerTask() {
-//                                    @Override
-//                                    public void run() {
-//                                        ((ServerWorld) world).removeEntity(entity);
-//                                    }
-//                                },
-//                                10000
-//                        );
-
-
                     }
-//                } else {
-//                    for (ItemStack itemstack : list) {
-//                        ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), itemstack);
-//                        double d0 = playerentity.getPosX() - this.getPosX();
-//                        double d1 = playerentity.getPosY() - this.getPosY();
-//                        double d2 = playerentity.getPosZ() - this.getPosZ();
-//                        double d3 = 0.1D;
-//                        itementity.setMotion(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
-//                        this.world.addEntity(itementity);
-//                        playerentity.world.addEntity(new ExperienceOrbEntity(playerentity.world, playerentity.getPosX(), playerentity.getPosY() + 0.5D, playerentity.getPosZ() + 0.5D, this.rand.nextInt(6) + 1));
-//                        if (itemstack.getItem().isIn(ItemTags.FISHES)) {
-//                            playerentity.addStat(Stats.FISH_CAUGHT, 1);
-//                        }
-//                    }
-//                }
+                } else if(fluidState1.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLUID)
+                || fluidState2.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLUID)) {
+                    for (ItemStack itemstack : listBroth) {
+                        ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), itemstack);
+                        double d0 = playerentity.getPosX() - this.getPosX();
+                        double d1 = playerentity.getPosY() - this.getPosY();
+                        double d2 = playerentity.getPosZ() - this.getPosZ();
+                        double d3 = 0.1D;
+                        itementity.setMotion(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
+                        this.world.addEntity(itementity);
+                        playerentity.world.addEntity(new ExperienceOrbEntity(playerentity.world, playerentity.getPosX(), playerentity.getPosY() + 0.5D, playerentity.getPosZ() + 0.5D, this.rand.nextInt(6) + 1));
+                        if (itemstack.getItem().isIn(ItemTags.FISHES)) {
+                            playerentity.addStat(Stats.FISH_CAUGHT, 1);
+                        }
+                    }
+                }
+                else {
+                    for (ItemStack itemstack : listVanilla) {
+                        ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), itemstack);
+                        double d0 = playerentity.getPosX() - this.getPosX();
+                        double d1 = playerentity.getPosY() - this.getPosY();
+                        double d2 = playerentity.getPosZ() - this.getPosZ();
+                        double d3 = 0.1D;
+                        itementity.setMotion(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
+                        this.world.addEntity(itementity);
+                        playerentity.world.addEntity(new ExperienceOrbEntity(playerentity.world, playerentity.getPosX(), playerentity.getPosY() + 0.5D, playerentity.getPosZ() + 0.5D, this.rand.nextInt(6) + 1));
+                        if (itemstack.getItem().isIn(ItemTags.FISHES)) {
+                            playerentity.addStat(Stats.FISH_CAUGHT, 1);
+                        }
+                    }
+                }
 
 
                 i = 1;

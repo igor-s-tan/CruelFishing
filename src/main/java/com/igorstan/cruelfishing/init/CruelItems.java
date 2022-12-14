@@ -21,6 +21,9 @@ public class CruelItems {
     public static final Item CORRUPTED_WATER_BUCKET =
             register(new BucketItem(() -> CruelFluids.CORRUPTED_WATER_FLUID, new Item.Properties().maxStackSize(1).group(CruelFishingMod.CRUEL_GROUP)), RegistryNames.CORRUPTED_WATER_BUCKET);
 
+    public static final Item DEMONIC_BROTH_BUCKET =
+            register(new BucketItem(() -> CruelFluids.DEMONIC_BROTH_FLUID, new Item.Properties().maxStackSize(1).group(CruelFishingMod.CRUEL_GROUP)), RegistryNames.DEMONIC_BROTH_BUCKET);
+
     public static final Item STOCK_MARKET_TABLET =
             register(new StockMarketTabletItem(72, RegistryNames.STOCK_MARKET_TABLET_DISPLAY_NAME), RegistryNames.STOCK_MARKET_TABLET);
 

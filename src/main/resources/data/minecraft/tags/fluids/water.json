@@ -2,6 +2,8 @@
   "replace" : false,
   "values" : [
     "cruelfishing:corrupted_water_fluid",
-    "cruelfishing:corrupted_water_flowing"
+    "cruelfishing:corrupted_water_flowing",
+    "cruelfishing:demonic_broth_fluid",
+    "cruelfishing:demonic_broth_flowing"
   ]
 }

@@ -11,6 +11,7 @@ public class StockMarketStorage implements Capability.IStorage<IStockMarket> {
     public INBT writeNBT(Capability<IStockMarket> capability, IStockMarket instance, net.minecraft.util.Direction side) {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt(RegistryNames.FLESHRAT_FISH, instance.getFishAmount(RegistryNames.FLESHRAT_FISH));
+        nbt.putBoolean(RegistryNames.FLESHRAT_FISH + "_is_dead", instance.getDead());
         return nbt;
     }
 
@@ -19,6 +20,7 @@ public class StockMarketStorage implements Capability.IStorage<IStockMarket> {
                         INBT inbt) {
         CompoundNBT nbt = (CompoundNBT) inbt;
         instance.setFishAmount(RegistryNames.FLESHRAT_FISH, nbt.getInt(RegistryNames.FLESHRAT_FISH));
+        instance.setDead(nbt.getBoolean(RegistryNames.FLESHRAT_FISH + "_is_dead"));
 
     }
 }

@@ -2,5 +2,8 @@
   "item.cruelfishing.fiberglass_fishing_rod": "Fiberglass Fishing Rod",
   "fluid.cruelfishing.corrupted_water" : "Corrupted Water",
   "item.cruelfishing.corrupted_water_bucket" : "Corrupted Water Bucket",
-  "itemGroup.CruelFishingTab" : "Cruel Fishing"
+  "itemGroup.CruelFishingTab" : "Cruel Fishing",
+  "fluid.cruelfishing.demonic_broth" : "Demonic Broth",
+  "item.cruelfishing.demonic_broth_bucket" : "Demonic Broth Bucket",
+  "item.cruelfishing.stock_market_tablet" : "Stock Market Tablet"
 }
