@@ -8,6 +8,7 @@ import com.igorstan.cruelfishing.entity.display.TextDisplay;
 import com.igorstan.cruelfishing.entity.fish.render.FleshratFishModelRenderer;
 import com.igorstan.cruelfishing.init.CruelEntities;
 import com.igorstan.cruelfishing.init.CruelItems;
+import com.igorstan.cruelfishing.network.Network;
 import com.igorstan.cruelfishing.playerdata.IStockMarket;
 import com.igorstan.cruelfishing.playerdata.StockMarket;
 import com.igorstan.cruelfishing.playerdata.StockMarketStorage;
@@ -50,8 +51,6 @@ public class CruelFishingMod
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-
-
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         eventBus.addListener(this::processIMC);
@@ -67,6 +66,7 @@ public class CruelFishingMod
     {
         LOGGER.info("HELLO FROM PREINIT");
         CapabilityManager.INSTANCE.register(IStockMarket.class, new StockMarketStorage(), StockMarket::new);
+        Network.init();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

@@ -1,11 +1,10 @@
 modLoader="javafml"
 loaderVersion="[36,)"
-license="CBT license"
+license=""
 logoFile="Figure_1.png"
 
 [[mods]]
 modId="cruelfishing"
-version="0.3"
 displayName="Cruel Fishing"
 authors="igorstan"
 

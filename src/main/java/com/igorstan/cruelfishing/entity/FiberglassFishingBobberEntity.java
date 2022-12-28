@@ -433,18 +433,21 @@ public class FiberglassFishingBobberEntity extends FishingBobberEntity {
                 LootTable lootTableBroth = Objects.requireNonNull(this.world.getServer()).getLootTableManager().getLootTableFromLocation(BROTH_LOOT_TABLE);
                 List<ItemStack> listBroth = lootTableBroth.generate(lootcontext$builder.build(LootParameterSets.FISHING));
 
-                event = new net.minecraftforge.event.entity.player.ItemFishedEvent(listVanilla, this.onGround ? 2 : 1, this);
-                net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
-                if (event.isCanceled()) {
-                    this.remove();
-                    return event.getRodDamage();
-                }
+
                 CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity)playerentity, p_146034_1_, this, listVanilla);
 
-                FluidState fluidState1 = this.world.getFluidState(this.getPosition().down());
-                FluidState fluidState2 = this.world.getFluidState(this.getPosition());
-                if(fluidState1.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)
-                || fluidState2.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)) {
+                double d = (float) MathHelper.floor(this.getBoundingBox().minY) + 1.0F;
+
+                FluidState fluidState = this.world.getFluidState(new BlockPos(this.getPosX(), d - 1.0d, this.getPosZ()));
+
+                if(fluidState.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLUID)
+                || fluidState.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.CORRUPTED_WATER_FLOWING)) {
+                    event = new net.minecraftforge.event.entity.player.ItemFishedEvent(listVanilla, this.onGround ? 2 : 1, this);
+                    net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+                    if (event.isCanceled()) {
+                        this.remove();
+                        return event.getRodDamage();
+                    }
                     for (ItemStack itemstack : listVanilla) {
                         EntityType<? extends FleshratFishEntity> entityType = CruelEntities.FLESHRAT_FISH_ENTITY;
                         Entity entity = entityType.spawn(((ServerWorld) this.world).getWorld(), itemstack, playerentity, this.getPosition().add(0, 0.5, 0), SpawnReason.MOB_SUMMONED, false, false);
@@ -452,8 +455,14 @@ public class FiberglassFishingBobberEntity extends FishingBobberEntity {
                         entity.noClip = true;
                         entity.setNoGravity(true);
                     }
-                } else if(fluidState1.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLUID)
-                || fluidState2.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLUID)) {
+                } else if(fluidState.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLUID)
+                || fluidState.getFluid().getRegistryName().toString().equals(CruelFishingMod.MODID + ":" + RegistryNames.DEMONIC_BROTH_FLOWING)) {
+                    event = new net.minecraftforge.event.entity.player.ItemFishedEvent(listBroth, this.onGround ? 2 : 1, this);
+                    net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+                    if (event.isCanceled()) {
+                        this.remove();
+                        return event.getRodDamage();
+                    }
                     for (ItemStack itemstack : listBroth) {
                         ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), itemstack);
                         double d0 = playerentity.getPosX() - this.getPosX();
@@ -469,6 +478,12 @@ public class FiberglassFishingBobberEntity extends FishingBobberEntity {
                     }
                 }
                 else {
+                    event = new net.minecraftforge.event.entity.player.ItemFishedEvent(listVanilla, this.onGround ? 2 : 1, this);
+                    net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+                    if (event.isCanceled()) {
+                        this.remove();
+                        return event.getRodDamage();
+                    }
                     for (ItemStack itemstack : listVanilla) {
                         ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), itemstack);
                         double d0 = playerentity.getPosX() - this.getPosX();

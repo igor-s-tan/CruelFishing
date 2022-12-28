@@ -1,10 +1,13 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://repo.spongepowered.org/service/rest/repository/browse/maven-public/'}
+        maven { url = 'https://repo.spongepowered.org/maven/' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -15,7 +18,12 @@ group = "${group}"
 archivesBaseName = "${id}-forge"
 
 repositories {
-    maven { url = "https://www.cursemaven.com" }
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 minecraft {
@@ -25,10 +33,8 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-
             mods {
                 cruelfishing {
                     source sourceSets.main
@@ -40,7 +46,6 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-
             mods {
                 cruelfishing {
                     source sourceSets.main
@@ -50,7 +55,6 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
@@ -71,6 +75,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation fg.deobf("io.gitlab.hohserg.elegant.networking:elegant-networking-1.16:3.14")
+    implementation fg.deobf("curse.maven:fishingreal-348834:3074201")
 
     compileOnly "io.gitlab.hohserg.elegant.networking:annotation-processor:3.14"
     annotationProcessor "io.gitlab.hohserg.elegant.networking:annotation-processor:3.14"
