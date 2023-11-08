@@ -62,7 +62,7 @@ public class TabletScreen extends AbstractContainerScreen<TabletContainer> {
 
 
     private void renderFishModel(EntityModel<? extends FishEntity> model) {
-        model.;
+
     }
 
     @Override
