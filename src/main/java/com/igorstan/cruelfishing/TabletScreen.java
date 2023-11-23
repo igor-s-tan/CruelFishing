@@ -41,7 +41,21 @@ import java.lang.Math;
 public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer> {
 
     public static final ResourceLocation GUI = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/tablet_screen.png");
+
     public static final ResourceLocation BUY_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_button.png");
+    public static final ResourceLocation BUY_2_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_2_button.png");
+    public static final ResourceLocation BUY_5_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_5_button.png");
+    public static final ResourceLocation BUY_10_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_10_button.png");
+    public static final ResourceLocation BUY_50_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_50_button.png");
+    public static final ResourceLocation BUY_100_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_100_button.png");
+
+    public static final ResourceLocation SELL_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_button.png");
+    public static final ResourceLocation SELL_2_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_2_button.png");
+    public static final ResourceLocation SELL_5_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_5_button.png");
+    public static final ResourceLocation SELL_10_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_10_button.png");
+    public static final ResourceLocation SELL_50_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_50_button.png");
+    public static final ResourceLocation SELL_100_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_100_button.png");
+
 
     public static final int backWidth = 256;
     public static final int backHeight = 225;
@@ -65,9 +79,47 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
         this.renderBackground(pPoseStack);
 
-        this.addRenderableWidget(new ImageButton(relX + 18, relY + 20, 30, 16, 0, 0, 0, BUY_BUTTON, 30, 16, TabletScreen::onAccept));
+        ImageButton buy = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton buy2 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3,  relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_2_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton buy5 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5,           relY+(backHeight/2) + 5 + 16 + 3,           31, 16, 0, 0, 0, BUY_5_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton buy10 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3,  relY+(backHeight/2) + 5 + 16 + 3,           31, 16, 0, 0, 0, BUY_10_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton buy50 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5,           relY+(backHeight/2) + 5 + 16 + 3 + 16 + 3,  31, 16, 0, 0, 0, BUY_50_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton buy100 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3,  relY+(backHeight/2) + 5 + 16 + 3 + 16 + 3,  31, 16, 0, 0, 0, BUY_100_BUTTON, 31, 16, TabletScreen::onAccept);
 
+        buy.setMessage(Component.translatable("1"));
+        buy2.setMessage(Component.translatable("2"));
+        buy5.setMessage(Component.translatable("5"));
+        buy10.setMessage(Component.translatable("10"));
+        buy50.setMessage(Component.translatable("50"));
+        buy100.setMessage(Component.translatable("100"));
 
+        this.addRenderableWidget(buy);
+        this.addRenderableWidget(buy2);
+        this.addRenderableWidget(buy5);
+        this.addRenderableWidget(buy10);
+        this.addRenderableWidget(buy50);
+        this.addRenderableWidget(buy100);
+
+        ImageButton sell = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 80,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, SELL_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton sell2 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3 + 80,  relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, SELL_2_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton sell5 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 80,           relY+(backHeight/2) + 5 + 16 + 3,           31, 16, 0, 0, 0, SELL_5_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton sell10 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3 + 80,  relY+(backHeight/2) + 5 + 16 + 3,           31, 16, 0, 0, 0, SELL_10_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton sell50 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 80,           relY+(backHeight/2) + 5 + 16 + 3 + 16 + 3,  31, 16, 0, 0, 0, SELL_50_BUTTON, 31, 16, TabletScreen::onAccept);
+        ImageButton sell100 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3 + 80,  relY+(backHeight/2) + 5 + 16 + 3 + 16 + 3,  31, 16, 0, 0, 0, SELL_100_BUTTON, 31, 16, TabletScreen::onAccept);
+
+        sell.setMessage(Component.translatable("-1"));
+        sell2.setMessage(Component.translatable("-2"));
+        sell5.setMessage(Component.translatable("-5"));
+        sell10.setMessage(Component.translatable("-10"));
+        sell50.setMessage(Component.translatable("-50"));
+        sell100.setMessage(Component.translatable("-100"));
+
+        this.addRenderableWidget(sell);
+        this.addRenderableWidget(sell2);
+        this.addRenderableWidget(sell5);
+        this.addRenderableWidget(sell10);
+        this.addRenderableWidget(sell50);
+        this.addRenderableWidget(sell100);
 
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         this.renderTooltip(pPoseStack, pMouseX, pMouseY);
@@ -76,7 +128,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
     }
 
     private static void onAccept(Button button) {
-
+        System.out.println(Integer.valueOf(button.getMessage().getString()));
     }
 
 
@@ -86,7 +138,13 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         int relX = (this.width - backWidth) / 2;
         int relY = (this.height - backHeight) / 2;
         GuiComponent.fill(pPoseStack, relX, relY, relX+backWidth, relY+backHeight, Color.BLACK.getRGB());
+
+
         GuiComponent.fill(pPoseStack, relX+(int)Math.floor(backWidth*0.3), relY, relX+(int)Math.floor(backWidth*0.3) + 1, relY+backHeight, Color.LIGHT_GRAY.getRGB());
+        GuiComponent.fill(pPoseStack, relX+(int)Math.floor(backWidth*0.3), relY+(backHeight/2), relX+backWidth, relY+(backHeight/2)+1, Color.LIGHT_GRAY.getRGB());
+
+
+
         //GuiComponent.blit(pPoseStack, relX, relY, 0, 0, backWidth, backHeight);
         Quaternionf quaternionf = (new Quaternionf()).rotateZ((float)Math.PI);
         //Quaternionf quaternionf1 = (new Quaternionf()).rotateX((float)Math.PI);
