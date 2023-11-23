@@ -272,10 +272,10 @@ public class FiberglassFishingHookEntity extends FishingHook {
      * Called when the arrow hits an entity
      */
     protected void onHitEntity(EntityHitResult pResult) {
-        super.onHitEntity(pResult);
-        if (!this.level.isClientSide) {
-            this.setHookedEntity(pResult.getEntity());
-        }
+//        super.onHitEntity(pResult);
+//        if (!this.level.isClientSide) {
+//            this.setHookedEntity(pResult.getEntity());
+//        }
 
     }
 

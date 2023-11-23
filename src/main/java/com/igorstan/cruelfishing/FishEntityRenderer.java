@@ -34,7 +34,7 @@ public class FishEntityRenderer<T extends FishEntity> extends EntityRenderer<T> 
     public void render(T fishEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         VertexConsumer vertexConsumer = buffer.getBuffer(fishEntityModel.renderType(this.texture));
-        fishEntityModel.setupAnim(fishEntity, partialTicks, 0, 0, entityYaw, 0);
+        fishEntityModel.setupAnim(fishEntity, partialTicks, 0, 0, 0, 0);
         fishEntityModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         poseStack.popPose();
         super.render(fishEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
