@@ -56,11 +56,11 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
     public static final ResourceLocation SELL_50_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_50_button.png");
     public static final ResourceLocation SELL_100_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/sell_100_button.png");
 
-
     public static final int backWidth = 256;
     public static final int backHeight = 225;
 
     private float walker;
+    private EntityType<? extends FishEntity> displayedFish;
 
     public TabletScreen(TabletContainer pContainer, Inventory pPlayerInventory, Component pTitle) {
         super(pContainer, pPlayerInventory, pTitle);
@@ -77,7 +77,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         int relX = (this.width - backWidth) / 2;
         int relY = (this.height - backHeight) / 2;
 
-        this.renderBackground(pPoseStack);
+        //this.renderBackground(pPoseStack);
 
         ImageButton buy = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_BUTTON, 31, 16, TabletScreen::onAccept);
         ImageButton buy2 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3,  relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_2_BUTTON, 31, 16, TabletScreen::onAccept);
@@ -146,19 +146,37 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
 
         //GuiComponent.blit(pPoseStack, relX, relY, 0, 0, backWidth, backHeight);
-        Quaternionf quaternionf = (new Quaternionf()).rotateZ((float)Math.PI);
+
         //Quaternionf quaternionf1 = (new Quaternionf()).rotateX((float)Math.PI);
-        FishEntity pEntity = CruelEntities.FLESHRAT.get().create(this.minecraft.level);
+        if(displayedFish != null) {
+            renderFish(pPoseStack, pPartialTick, relX, relY, displayedFish);
+        }
         //pEntity.yBodyRot = walker;
 
-        drawDiagonalLine(pPoseStack, 7, 87, 15, 54, Color.GREEN.getRGB());
-        drawDiagonalLine(pPoseStack, 15, 54, 90, 90, Color.RED.getRGB());
+        int time = 40;
+        int startX = relX+(int)Math.floor(backWidth*0.3) + 10;
+        int startY = relY + backHeight/2 - 50;
 
+        drawDiagonalLine(pPoseStack, startX, startY, startX + time, startY - 30, Color.GREEN.getRGB());
+        drawDiagonalLine(pPoseStack, startX + time, startY - 30, startX + 2*time, startY + 5, Color.RED.getRGB());
+        drawDiagonalLine(pPoseStack, startX + 2*time, startY + 5, startX + 3*time, startY + 10, Color.RED.getRGB());
+        drawDiagonalLine(pPoseStack, startX + 3*time, startY + 10, startX + 4*time, startY, Color.GREEN.getRGB());
+
+
+
+        ImageButton fleshrat = new ImageButton(relX+(int)Math.floor(backWidth*0.3) - 50,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_BUTTON, 31, 16, (button) -> {
+            displayedFish = CruelEntities.FLESHRAT.get();
+        });
+
+        this.addRenderableWidget(fleshrat);
+
+    }
+
+    private void renderFish(PoseStack pPoseStack, float pPartialTick, int relX, int relY, EntityType<? extends FishEntity> entityType) {
+        FishEntity pEntity = entityType.create(this.minecraft.level);
+        Quaternionf quaternionf = (new Quaternionf()).rotateZ((float)Math.PI);
         pEntity.setYRot(walker);
-
-
-        renderEntity(pPoseStack, relX + backWidth - 91, this.topPos + 75, 30, quaternionf, quaternionf, pEntity);
-
+        renderEntity(pPoseStack, relX + backWidth - 91, this.topPos + 75, 60, quaternionf, quaternionf, pEntity);
     }
 
     @Override
@@ -181,43 +199,24 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
 
     private void drawDiagonalLine(PoseStack pPoseStack, int x0, int y0, int x1, int y1, int color) {
-        int hDist = Math.abs(x0 - x1);
-        int vDist = Math.abs(y0 - y1);
-        int parts = Math.min(hDist, vDist);
-
-        if(parts == hDist) {
-            int length = (int) Math.floor((float) (y1 - y0) / (float) parts);
-            int residual = y1 - y0 - length*parts;
-            for(int i = 0; i < parts; ++i) {
-                fill(pPoseStack, x0 + i, y0 + length*i, x0 + i, y0 + length*(i+1), color);
+        int y_prev = 0;
+        for(int i = 0; i < x1 - x0; ++i) {
+            double y = (i+1)*(y1-y0+0.0)/(x1-x0+0.0) + y0;
+            if(y < y0) {
+                y = Math.floor(y);
+            } else {
+                y = Math.ceil(y);
             }
-            fill(pPoseStack, x1, y1 - residual, x1, y1, color);
-        } else {
-            int length1 = (int) Math.floor((float) (x1 - x0) / (float) parts);
-            int length2 = length1 + 1;
-
-            Vector2f vec = new Vector2f(hDist, parts);
-            Matrix2f mat = new Matrix2f();
-            mat.m00 = length1;
-            mat.m01 = length2;
-            mat.m10 = 1;
-            mat.m11 = 1;
-            mat.invert();
-            mat.transpose();
-            Vector2f result = mat.transform(vec);
-            int parts1 = (int) result.x;
-            int parts2 = (int) result.y;
-            for(int i = 0; i < parts1; ++i) {
-                fill(pPoseStack, Math.min(x0 + length1*i, x0 + length1*(i+1)), y0 + i, Math.max(x0 + length1*i, x0 + length1*(i+1)), y0 + i + 1, color);
+            drawPixel(pPoseStack, x0 + i, (int) y, color);
+            for(int k = 1; k < y_prev - (int)y; ++k) {
+                drawPixel(pPoseStack, x0 + i, (int) y+k, color);
             }
-            for(int i = 0; i < parts2; ++i) {
-                int temp1 = x0 + length1 * parts1 + length2 * i;
-                int temp2 = x0 + length1 * parts1 + length2 * (i + 1);
-                fill(pPoseStack, Math.min(temp1, temp2), y0 + parts1 + i, Math.max(temp1, temp2), y0 + parts1 + i + 1, color);
-            }
-
+            y_prev = (int)y;
         }
+    }
 
+    private void drawPixel(PoseStack pPoseStack, int x0, int y0, int color) {
+        fill(pPoseStack, x0, y0, x0+1, y0+1, color);
     }
 
     private void renderEntity(PoseStack pPoseStack, int pX, int pY, int pScale, Quaternionf p_275229_, @Nullable Quaternionf pCameraOrientation, LivingEntity pEntity) {
@@ -227,7 +226,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         posestack.translate(0.0D, 0.0D, 1000.0D);
         RenderSystem.applyModelViewMatrix();
         pPoseStack.pushPose();
-        pPoseStack.translate((double)pX, (double)pY, -950.0D);
+        pPoseStack.translate((double)pX, (double)pY+55, -950.0D);
         pPoseStack.mulPoseMatrix((new Matrix4f()).scaling((float)pScale, (float)pScale, (float)(-pScale)));
         pPoseStack.mulPose(p_275229_);
         Lighting.setupForEntityInInventory();
@@ -240,7 +239,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         entityrenderdispatcher.setRenderShadow(false);
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderdispatcher.render(pEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, pPoseStack, multibuffersource$buffersource, 5242960);
+            entityrenderdispatcher.render(pEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, pPoseStack, multibuffersource$buffersource, 7864440);
         });
         multibuffersource$buffersource.endBatch();
         entityrenderdispatcher.setRenderShadow(true);
