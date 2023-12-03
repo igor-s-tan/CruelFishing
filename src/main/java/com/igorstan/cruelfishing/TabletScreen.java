@@ -1,42 +1,27 @@
 package com.igorstan.cruelfishing;
 
-import com.igorstan.cruelfishing.models.FleshratFishModel;
-import com.igorstan.cruelfishing.registry.CruelClientRegistry;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import net.minecraft.CrashReport;
-import net.minecraft.CrashReportCategory;
-import net.minecraft.ReportedException;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.network.NetworkHooks;
 import org.joml.*;
 
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.lang.Math;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer> {
 
@@ -60,7 +45,8 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
     public static final int backHeight = 225;
 
     private float walker;
-    private EntityType<? extends FishEntity> displayedFish;
+    private static EntityType<? extends FishEntity> displayedFish;
+    private int relX, relY;
 
     public TabletScreen(TabletContainer pContainer, Inventory pPlayerInventory, Component pTitle) {
         super(pContainer, pPlayerInventory, pTitle);
@@ -70,15 +56,15 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         titleLabelX += shift;
         titleLabelY += shift;
         walker = 0.0f;
+        relX = (this.width - backWidth) / 2;
+        relY = (this.height - backHeight) / 2;
     }
 
     @Override
-    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        int relX = (this.width - backWidth) / 2;
-        int relY = (this.height - backHeight) / 2;
-
-        //this.renderBackground(pPoseStack);
-
+    protected void init() {
+        super.init();
+        relX = (this.width - backWidth) / 2;
+        relY = (this.height - backHeight) / 2;
         ImageButton buy = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_BUTTON, 31, 16, TabletScreen::onAccept);
         ImageButton buy2 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5 + 31 + 3,  relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_2_BUTTON, 31, 16, TabletScreen::onAccept);
         ImageButton buy5 = new ImageButton(relX+(int)Math.floor(backWidth*0.3) + 5,           relY+(backHeight/2) + 5 + 16 + 3,           31, 16, 0, 0, 0, BUY_5_BUTTON, 31, 16, TabletScreen::onAccept);
@@ -121,6 +107,33 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         this.addRenderableWidget(sell50);
         this.addRenderableWidget(sell100);
 
+
+        ImageButton fleshrat = new ImageButton(relX+(int)Math.floor(backWidth*0.3) - 50,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_BUTTON, 31, 16, (button) -> {
+            displayedFish = CruelEntities.FLESHRAT.get();
+        });
+
+        this.addRenderableWidget(fleshrat);
+    }
+
+    @Override
+    protected void containerTick() {
+        super.containerTick();
+        walker += 0.1f;
+        if(walker >= 360f) {
+            walker = 0f;
+        }
+        relX = (this.width - backWidth) / 2;
+        relY = (this.height - backHeight) / 2;
+    }
+
+    @Override
+    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+
+
+        //this.renderBackground(pPoseStack);
+
+
+
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         this.renderTooltip(pPoseStack, pMouseX, pMouseY);
 
@@ -128,15 +141,17 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
     }
 
     private static void onAccept(Button button) {
-        System.out.println(Integer.valueOf(button.getMessage().getString()));
+        if(displayedFish != null) {
+            System.out.println(displayedFish.getDescriptionId());
+            CruelNetworking.INSTANCE.sendToServer(new BuyFishPacket(displayedFish.getDescriptionId(), Integer.valueOf(button.getMessage().getString())));
+        }
+
     }
 
 
     @Override
     protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
         //RenderSystem.setShaderTexture(0, GUI);
-        int relX = (this.width - backWidth) / 2;
-        int relY = (this.height - backHeight) / 2;
         GuiComponent.fill(pPoseStack, relX, relY, relX+backWidth, relY+backHeight, Color.BLACK.getRGB());
 
 
@@ -149,7 +164,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
         //Quaternionf quaternionf1 = (new Quaternionf()).rotateX((float)Math.PI);
         if(displayedFish != null) {
-            renderFish(pPoseStack, pPartialTick, relX, relY, displayedFish);
+            renderFish(pPoseStack, pPartialTick, displayedFish);
         }
         //pEntity.yBodyRot = walker;
 
@@ -163,35 +178,27 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         drawDiagonalLine(pPoseStack, startX + 3*time, startY + 10, startX + 4*time, startY, Color.GREEN.getRGB());
 
 
-
-        ImageButton fleshrat = new ImageButton(relX+(int)Math.floor(backWidth*0.3) - 50,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_BUTTON, 31, 16, (button) -> {
-            displayedFish = CruelEntities.FLESHRAT.get();
+        this.minecraft.player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
+            drawString(pPoseStack, this.font, "Cash: $" + portfolio.getNetWorth(), relX+2 + (int)Math.floor(backWidth*0.3), relY+2, Color.WHITE.getRGB());
         });
 
-        this.addRenderableWidget(fleshrat);
+
+
 
     }
 
-    private void renderFish(PoseStack pPoseStack, float pPartialTick, int relX, int relY, EntityType<? extends FishEntity> entityType) {
+    private void renderFish(PoseStack pPoseStack, float pPartialTick, EntityType<? extends FishEntity> entityType) {
         FishEntity pEntity = entityType.create(this.minecraft.level);
         Quaternionf quaternionf = (new Quaternionf()).rotateZ((float)Math.PI);
         pEntity.setYRot(walker);
         renderEntity(pPoseStack, relX + backWidth - 91, this.topPos + 75, 60, quaternionf, quaternionf, pEntity);
     }
 
-    @Override
-    protected void containerTick() {
-        super.containerTick();
-        walker += 0.1f;
-        if(walker >= 360f) {
-            walker = 0f;
-        }
-    }
+
 
     @Override
     protected void renderLabels(PoseStack pose, int mouseX, int mouseY) {
         super.renderLabels(pose, mouseX, mouseY);
-
         // Assume we have some Component 'label'
         // 'label' is drawn at 'labelX' and 'labelY'
         // this.font.draw(pose, label, labelX, labelY, 0x404040);

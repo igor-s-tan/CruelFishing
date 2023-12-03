@@ -1,5 +1,6 @@
 package com.igorstan.cruelfishing;
 
+import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.nbt.CompoundTag;
 import org.antlr.v4.runtime.misc.Pair;
 
@@ -15,6 +16,7 @@ public class Portfolio {
 
     public Portfolio() {
         this.portfolioMap = new HashMap<>();
+        this.portfolioMap.put(CruelEntities.FLESHRAT.get().getDescriptionId(), 0);
         this.netWorth = 0.0D;
     }
 
@@ -69,17 +71,19 @@ public class Portfolio {
         Vector<Float> prices = stocksInfo.getPrices(name);
         if(this.removeAmount(name, amount)) {
             this.addNetWorth(prices.get(prices.size()-1) * amount);
+            System.out.println(prices.get(prices.size()-1) * amount);
         }
     }
 
     public void saveNBT(CompoundTag nbt) {
         for(String key : this.portfolioMap.keySet()) {
-            nbt.putInt(key + "_" + CruelResourses.cruelPortfolio.toLanguageKey(), this.portfolioMap.get(key));
+            nbt.putInt(key + "_" + CruelResourses.cruelPortfolio.toString(), this.portfolioMap.get(key));
         }
-        nbt.putDouble(CruelResourses.cruelNetWorth.toLanguageKey() + "_" + CruelResourses.cruelPortfolio.toLanguageKey(), this.netWorth);
+        nbt.putDouble(CruelResourses.cruelNetWorth.toString() + "_" + CruelResourses.cruelPortfolio.toString(), this.netWorth);
     }
     public void loadNBT(CompoundTag nbt) {
-        this.portfolioMap.replaceAll((key, value) -> nbt.getInt(key + "_" + CruelResourses.cruelPortfolio));
+        this.portfolioMap.replaceAll((key, value) -> nbt.getInt(key + "_" + CruelResourses.cruelPortfolio.toString()));
+        this.netWorth = nbt.getDouble(CruelResourses.cruelNetWorth.toString() + "_" + CruelResourses.cruelPortfolio.toString());
     }
 
 }

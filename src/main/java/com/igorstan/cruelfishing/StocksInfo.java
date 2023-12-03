@@ -1,5 +1,6 @@
 package com.igorstan.cruelfishing;
 
+import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.nbt.CompoundTag;
 import org.antlr.v4.runtime.misc.Pair;
 
@@ -17,12 +18,14 @@ public class StocksInfo {
         Random rand = new Random();
         Vector<Float> vector = new Vector<>();
         for(int i = 0; i < CruelResourses.PRICE_HISTORY_SIZE; ++i) {
-            vector.add(rand.nextFloat(50));
+            float next = rand.nextFloat(50f);
+            System.out.println(next);
+            vector.add(next);
         }
 
         this.stocksInfoMap = new HashMap<>();
 
-        this.stocksInfoMap.put("FleshRatStock", new Pair<>(vector, 2));
+        this.stocksInfoMap.put(CruelEntities.FLESHRAT.get().getDescriptionId(), new Pair<>(vector, 2));
         this.stocksInfoMap.put("HumanStock", new Pair<>(vector, 20));
     }
 
@@ -57,14 +60,14 @@ public class StocksInfo {
 
     private void putFloatVector(CompoundTag nbt, Vector<Float> vector, String key) {
         for(int i = 0; i < CruelResourses.PRICE_HISTORY_SIZE; ++i) {
-            nbt.putFloat(key + CruelResourses.cruelStocksInfo.toLanguageKey() + i, vector.get(i));
+            nbt.putFloat(key + CruelResourses.cruelStocksInfo.toString() + i, vector.get(i));
         }
     }
 
     private Vector<Float> getFloatVector(CompoundTag nbt, String key) {
         Vector<Float> result = new Vector<>();
         for(int i = 0; i < CruelResourses.PRICE_HISTORY_SIZE; ++i) {
-            result.add(nbt.getFloat(key + CruelResourses.cruelStocksInfo.toLanguageKey() + i));
+            result.add(nbt.getFloat(key + CruelResourses.cruelStocksInfo.toString() + i));
         }
         return result;
     }

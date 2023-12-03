@@ -7,14 +7,11 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Random;
-
 @Mod.EventBusSubscriber(modid = CruelFishingMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class CruelCommonEvents {
+public class CruelCommonEventsForge {
 
     @SubscribeEvent
     public static void onAttachCapabilitiesLevel(AttachCapabilitiesEvent<Level> event) {
@@ -26,17 +23,15 @@ public class CruelCommonEvents {
     }
 
     @SubscribeEvent
-    public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Player> event) {
-        if(!event.getObject().getCapability(PortfolioCapability.PORTFOLIO).isPresent()) {
-            event.addCapability(CruelResourses.cruelPortfolio, new PortfolioCapability());
+    public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
+        if(event.getObject() instanceof Player) {
+            if (!event.getObject().getCapability(PortfolioCapability.PORTFOLIO).isPresent()) {
+                event.addCapability(CruelResourses.cruelPortfolio, new PortfolioCapability());
+            }
         }
     }
 
-    @SubscribeEvent
-    public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-        event.register(StocksInfo.class);
-        event.register(Portfolio.class);
-    }
+
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.LevelTickEvent event) {

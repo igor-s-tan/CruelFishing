@@ -1,8 +1,11 @@
 package com.igorstan.cruelfishing;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Optional;
@@ -38,5 +41,28 @@ public class CruelNetworking {
                 CreateEntityPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
+
+        INSTANCE.registerMessage(
+                ++id,
+                UpdateCapabilityPacket.class,
+                UpdateCapabilityPacket::toBytes,
+                UpdateCapabilityPacket::new,
+                UpdateCapabilityPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+
+        INSTANCE.registerMessage(
+                ++id,
+                BuyFishPacket.class,
+                BuyFishPacket::toBytes,
+                BuyFishPacket::new,
+                BuyFishPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+    }
+
+
+    public static void sendToClient(Object msg, Player player) {
+        INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), msg);
     }
 }

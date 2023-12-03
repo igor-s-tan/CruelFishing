@@ -1,5 +1,6 @@
 package com.igorstan.cruelfishing;
 
+import com.igorstan.cruelfishing.registry.CruelEntities;
 import com.mojang.util.UUIDTypeAdapter;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -9,6 +10,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -21,7 +23,9 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -73,10 +77,16 @@ public class FishEntity extends LivingEntity {
                 this.remove(RemovalReason.DISCARDED);
                 this.setRotYSpeed(0.0f);
                 this.setMoveToFisherman(null);
+                if(!level.isClientSide) {
+                    player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
+                        portfolio.addAmount(CruelEntities.FLESHRAT.get().getDescriptionId(), 1);
+                        CompoundTag nbt = new CompoundTag();
+                        portfolio.saveNBT(nbt);
+                        CruelNetworking.sendToClient(new UpdateCapabilityPacket(nbt), player);
+                    });
+                }
 
-                player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
-                    portfolio.addAmount(CruelResourses.fleshratFishEntity, 1);
-                });
+
 
             }
             this.setRotYSpeed(0.4f);

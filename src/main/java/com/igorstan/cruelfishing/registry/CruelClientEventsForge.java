@@ -1,15 +1,13 @@
 package com.igorstan.cruelfishing.registry;
 
-import com.igorstan.cruelfishing.CruelFishingMod;
-import com.igorstan.cruelfishing.CruelNetworking;
-import com.igorstan.cruelfishing.OpenTabletPacket;
+import com.igorstan.cruelfishing.*;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,13 +15,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(modid = CruelFishingMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class CruelClientEvents {
+public class CruelClientEventsForge {
 
     public static KeyMapping openTabletKey;
 
     static {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.addListener(CruelClientEvents::registerKeyBindings);
+        eventBus.addListener(CruelClientEventsForge::registerKeyBindings);
     }
 
     public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
@@ -41,6 +39,8 @@ public class CruelClientEvents {
         }
 
     }
+
+
 
 
 

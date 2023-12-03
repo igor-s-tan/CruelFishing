@@ -111,6 +111,7 @@ public class CruelFishingMod
         {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
             event.enqueueWork(
                     () -> MenuScreens.register(CruelContainers.TABLET_CONTAINER.get(), TabletScreen::new)
             );
