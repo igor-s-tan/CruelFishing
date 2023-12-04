@@ -21,11 +21,14 @@ import org.joml.*;
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.lang.Math;
+import java.util.Collections;
+import java.util.Vector;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer> {
 
     public static final ResourceLocation GUI = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/tablet_screen.png");
+    public static final ResourceLocation FISH_NAME = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/fish_name.png");
 
     public static final ResourceLocation BUY_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_button.png");
     public static final ResourceLocation BUY_2_BUTTON = new ResourceLocation(CruelFishingMod.MODID, "textures/gui/buy_2_button.png");
@@ -108,7 +111,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         this.addRenderableWidget(sell100);
 
 
-        ImageButton fleshrat = new ImageButton(relX+(int)Math.floor(backWidth*0.3) - 50,           relY+(backHeight/2) + 5,                    31, 16, 0, 0, 0, BUY_BUTTON, 31, 16, (button) -> {
+        ImageButton fleshrat = new ImageButton(relX + 5,relY + 5,31, 16, 0, 0, 0, FISH_NAME, 31, 10, (button) -> {
             displayedFish = CruelEntities.FLESHRAT.get();
         });
 
@@ -165,22 +168,46 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         //Quaternionf quaternionf1 = (new Quaternionf()).rotateX((float)Math.PI);
         if(displayedFish != null) {
             renderFish(pPoseStack, pPartialTick, displayedFish);
+            this.minecraft.level.getCapability(StocksInfoCapability.STOCKS_INFO).ifPresent(stocksInfo -> {
+                Vector<Float> prices = stocksInfo.getPrices(displayedFish.getDescriptionId());
+                float maxPrice = Collections.max(prices);
+                drawString(pPoseStack, this.font, "Price: $" + prices.get(prices.size()-1), relX+2 + (int)Math.floor(backWidth*0.3), relY + 10, Color.WHITE.getRGB());
+                int startX = relX+(int)Math.floor(backWidth*0.3) + 10;
+                int startY = relY + backHeight/2 - 50;
+                int endY = startY - 30;
+                int time = ((int)Math.floor(backWidth*0.7) -20)/(CruelResourses.PRICE_HISTORY_SIZE-1);
+
+                int count = 0;
+                float prevPrice = prices.get(0);
+                //prices.remove(0);
+                for(Float price: prices) {
+                    if(prices.indexOf(price) == 0) {continue;}
+                    Color color;
+                    float firstPoint = startY - (startY - endY)*(prevPrice/maxPrice);
+                    float secondPoint = startY - (startY - endY)*(price/maxPrice);
+                    if(firstPoint < secondPoint) {
+                        color = Color.RED;
+                    } else {
+                        color = Color.GREEN;
+                    }
+                    drawDiagonalLine(pPoseStack, startX + count*time, (int)Math.floor(firstPoint), startX + (count+1)*time, (int)Math.floor(secondPoint), color.getRGB());
+                    prevPrice = price;
+                    ++count;
+                }
+            });
         }
         //pEntity.yBodyRot = walker;
 
-        int time = 40;
-        int startX = relX+(int)Math.floor(backWidth*0.3) + 10;
-        int startY = relY + backHeight/2 - 50;
 
-        drawDiagonalLine(pPoseStack, startX, startY, startX + time, startY - 30, Color.GREEN.getRGB());
-        drawDiagonalLine(pPoseStack, startX + time, startY - 30, startX + 2*time, startY + 5, Color.RED.getRGB());
-        drawDiagonalLine(pPoseStack, startX + 2*time, startY + 5, startX + 3*time, startY + 10, Color.RED.getRGB());
-        drawDiagonalLine(pPoseStack, startX + 3*time, startY + 10, startX + 4*time, startY, Color.GREEN.getRGB());
+
+        drawString(pPoseStack, this.font, "Fleshrat", relX + 5, relY + 5, Color.WHITE.getRGB());
 
 
         this.minecraft.player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
             drawString(pPoseStack, this.font, "Cash: $" + portfolio.getNetWorth(), relX+2 + (int)Math.floor(backWidth*0.3), relY+2, Color.WHITE.getRGB());
         });
+
+
 
 
 

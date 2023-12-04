@@ -4,7 +4,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.function.Supplier;
 
@@ -38,14 +37,12 @@ public class BuyFishPacket {
                     if(this.amount > 0) {
                         portfolio.buy(this.displayedFish, this.amount, stocksInfo);
                     } else {
-                        portfolio.sell(this.displayedFish, this.amount, stocksInfo);
-                        System.out.println(this.displayedFish);
-                        System.out.println(stocksInfo.getPrices(this.displayedFish));
+                        portfolio.sell(this.displayedFish, -this.amount, stocksInfo);
                     }
                 });
                 portfolio.saveNBT(nbt);
             });
-            CruelNetworking.sendToClient(new UpdateCapabilityPacket(nbt), player);
+            CruelNetworking.sendToClient(new UpdatePortfolioPacket(nbt), player);
         });
 
         ctx.setPacketHandled(true);

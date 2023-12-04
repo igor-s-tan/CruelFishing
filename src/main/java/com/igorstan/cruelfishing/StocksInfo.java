@@ -18,15 +18,13 @@ public class StocksInfo {
         Random rand = new Random();
         Vector<Float> vector = new Vector<>();
         for(int i = 0; i < CruelResourses.PRICE_HISTORY_SIZE; ++i) {
-            float next = rand.nextFloat(50f);
-            System.out.println(next);
-            vector.add(next);
+            vector.add(rand.nextFloat(50f));
         }
 
         this.stocksInfoMap = new HashMap<>();
 
-        this.stocksInfoMap.put(CruelEntities.FLESHRAT.get().getDescriptionId(), new Pair<>(vector, 2));
-        this.stocksInfoMap.put("HumanStock", new Pair<>(vector, 20));
+        this.stocksInfoMap.put(CruelEntities.FLESHRAT.get().getDescriptionId(), new Pair<>(vector, 1));
+        this.stocksInfoMap.put("HumanStock", new Pair<>(vector, 120));
     }
 
     public Vector<Float> getPrices(String name) {
@@ -54,7 +52,7 @@ public class StocksInfo {
         }
     }
     public void loadNBT(CompoundTag nbt) {
-        this.stocksInfoMap.replaceAll((k, v) -> new Pair<>(getFloatVector(nbt, k), this.stocksInfoMap.get(k).b));
+        this.stocksInfoMap.replaceAll((k, v) -> new Pair<>(getFloatVector(nbt, k), v.b));
     }
 
 

@@ -8,15 +8,15 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class UpdateCapabilityPacket {
+public class UpdatePortfolioPacket {
 
     private final CompoundTag nbt;
 
-    public UpdateCapabilityPacket(CompoundTag nbt) {
+    public UpdatePortfolioPacket(CompoundTag nbt) {
         this.nbt = nbt;
     }
 
-    public UpdateCapabilityPacket(FriendlyByteBuf buffer) {
+    public UpdatePortfolioPacket(FriendlyByteBuf buffer) {
         this.nbt = buffer.readNbt();
     }
 

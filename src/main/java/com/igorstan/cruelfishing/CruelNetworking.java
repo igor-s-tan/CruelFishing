@@ -44,10 +44,19 @@ public class CruelNetworking {
 
         INSTANCE.registerMessage(
                 ++id,
-                UpdateCapabilityPacket.class,
-                UpdateCapabilityPacket::toBytes,
-                UpdateCapabilityPacket::new,
-                UpdateCapabilityPacket::handle,
+                UpdatePortfolioPacket.class,
+                UpdatePortfolioPacket::toBytes,
+                UpdatePortfolioPacket::new,
+                UpdatePortfolioPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+
+        INSTANCE.registerMessage(
+                ++id,
+                UpdateStocksInfoPacket.class,
+                UpdateStocksInfoPacket::toBytes,
+                UpdateStocksInfoPacket::new,
+                UpdateStocksInfoPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
 
@@ -64,5 +73,9 @@ public class CruelNetworking {
 
     public static void sendToClient(Object msg, Player player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), msg);
+    }
+
+    public static void sendToAllClients(Object msg) {
+        INSTANCE.send(PacketDistributor.ALL.noArg(), msg);
     }
 }

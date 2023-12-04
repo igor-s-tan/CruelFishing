@@ -34,6 +34,8 @@ public class Portfolio {
 
     public boolean removeAmount(String name, int amount) {
         if(this.getAmount(name) >= amount) {
+            System.out.println(this.getAmount(name));
+            System.out.println(amount);
             this.portfolioMap.put(name, this.getAmount(name) - amount);
             return true;
         }
@@ -71,7 +73,6 @@ public class Portfolio {
         Vector<Float> prices = stocksInfo.getPrices(name);
         if(this.removeAmount(name, amount)) {
             this.addNetWorth(prices.get(prices.size()-1) * amount);
-            System.out.println(prices.get(prices.size()-1) * amount);
         }
     }
 

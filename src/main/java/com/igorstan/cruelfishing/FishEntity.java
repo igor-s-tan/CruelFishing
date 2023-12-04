@@ -1,35 +1,21 @@
 package com.igorstan.cruelfishing;
 
 import com.igorstan.cruelfishing.registry.CruelEntities;
-import com.mojang.util.UUIDTypeAdapter;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Collections;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 public class FishEntity extends LivingEntity {
@@ -82,7 +68,7 @@ public class FishEntity extends LivingEntity {
                         portfolio.addAmount(CruelEntities.FLESHRAT.get().getDescriptionId(), 1);
                         CompoundTag nbt = new CompoundTag();
                         portfolio.saveNBT(nbt);
-                        CruelNetworking.sendToClient(new UpdateCapabilityPacket(nbt), player);
+                        CruelNetworking.sendToClient(new UpdatePortfolioPacket(nbt), player);
                     });
                 }
 
