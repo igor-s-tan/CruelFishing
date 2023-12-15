@@ -1,5 +1,7 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.network;
 
+import com.igorstan.cruelfishing.capability.PortfolioCapability;
+import com.igorstan.cruelfishing.capability.StocksInfoCapability;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +33,6 @@ public class BuyFishPacket {
         ctx.enqueueWork(() -> {
             ServerPlayer player = ctx.getSender();
             CompoundTag nbt = new CompoundTag();
-
             player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
                 player.level.getCapability(StocksInfoCapability.STOCKS_INFO).ifPresent(stocksInfo -> {
                     if(this.amount > 0) {

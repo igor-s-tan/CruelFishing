@@ -1,5 +1,7 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.network;
 
+import com.igorstan.cruelfishing.stocks.Portfolio;
+import com.igorstan.cruelfishing.capability.PortfolioCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;

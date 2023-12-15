@@ -1,8 +1,10 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.capability;
 
+import com.igorstan.cruelfishing.network.CruelNetworking;
+import com.igorstan.cruelfishing.network.UpdateStocksInfoPacket;
+import com.igorstan.cruelfishing.stocks.StocksInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.capabilities.*;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
@@ -41,6 +43,7 @@ public class StocksInfoCapability implements ICapabilityProvider, INBTSerializab
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
+        CruelNetworking.sendToAllClients(new UpdateStocksInfoPacket(nbt));
         createStocksInfo().loadNBT(nbt);
     }
 }

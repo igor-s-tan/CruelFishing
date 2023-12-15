@@ -1,5 +1,6 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.network;
 
+import com.igorstan.cruelfishing.CruelFishingMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

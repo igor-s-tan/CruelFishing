@@ -1,8 +1,8 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.stocks;
 
+import com.igorstan.cruelfishing.CruelResourses;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.nbt.CompoundTag;
-import org.antlr.v4.runtime.misc.Pair;
 
 import java.util.HashMap;
 import java.util.Map;

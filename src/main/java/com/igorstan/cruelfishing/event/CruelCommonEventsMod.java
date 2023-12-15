@@ -1,9 +1,10 @@
-package com.igorstan.cruelfishing.registry;
+package com.igorstan.cruelfishing.event;
 
-import com.igorstan.cruelfishing.CruelFishingMod;
-import com.igorstan.cruelfishing.FishEntity;
-import com.igorstan.cruelfishing.Portfolio;
-import com.igorstan.cruelfishing.StocksInfo;
+import com.igorstan.cruelfishing.*;
+import com.igorstan.cruelfishing.entity.FishEntity;
+import com.igorstan.cruelfishing.registry.CruelEntities;
+import com.igorstan.cruelfishing.stocks.Portfolio;
+import com.igorstan.cruelfishing.stocks.StocksInfo;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,4 +23,6 @@ public class CruelCommonEventsMod {
         event.register(StocksInfo.class);
         event.register(Portfolio.class);
     }
+
+
 }

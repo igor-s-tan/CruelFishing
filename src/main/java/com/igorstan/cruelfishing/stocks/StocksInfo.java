@@ -1,5 +1,6 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.stocks;
 
+import com.igorstan.cruelfishing.CruelResourses;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.nbt.CompoundTag;
 import org.antlr.v4.runtime.misc.Pair;
@@ -11,7 +12,7 @@ import java.util.Vector;
 
 public class StocksInfo {
 
-    private Map<String, Pair<Vector<Float>, Integer>> stocksInfoMap;
+    private final Map<String, Pair<Vector<Float>, Integer>> stocksInfoMap;
 
 
     public StocksInfo() {
@@ -32,10 +33,12 @@ public class StocksInfo {
     }
 
     public void addPrice(String name, float newPrice) {
-        Vector<Float> tempVec = this.stocksInfoMap.get(name).a;
-        tempVec.remove(0);
-        tempVec.add(newPrice);
-        this.stocksInfoMap.put(name, new Pair<>(tempVec, this.stocksInfoMap.get(name).b));
+        Vector<Float> oldPrices = this.stocksInfoMap.get(name).a;
+        for(int i = 0; i < oldPrices.size()-1; ++i) {
+            oldPrices.set(i, oldPrices.get(i+1));
+        }
+        oldPrices.set(oldPrices.size()-1, newPrice);
+        this.stocksInfoMap.put(name, new Pair<>(oldPrices, this.stocksInfoMap.get(name).b));
     }
 
     public int getVolatility(String name) {

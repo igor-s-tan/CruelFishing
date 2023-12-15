@@ -2,14 +2,12 @@ package com.igorstan.cruelfishing.registry;
 
 import com.google.common.collect.ImmutableSet;
 import com.igorstan.cruelfishing.CruelResourses;
-import com.igorstan.cruelfishing.FiberglassFishingHookEntity;
-import com.igorstan.cruelfishing.FishEntity;
+import com.igorstan.cruelfishing.entity.FiberglassFishingHookEntity;
+import com.igorstan.cruelfishing.entity.FishEntity;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.FishingHook;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.registries.DeferredRegister;

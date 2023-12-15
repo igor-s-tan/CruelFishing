@@ -1,5 +1,9 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.entity;
 
+import com.igorstan.cruelfishing.CruelResourses;
+import com.igorstan.cruelfishing.capability.PortfolioCapability;
+import com.igorstan.cruelfishing.network.CruelNetworking;
+import com.igorstan.cruelfishing.network.UpdatePortfolioPacket;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

@@ -2,7 +2,7 @@ package com.igorstan.cruelfishing.registry;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
 import com.igorstan.cruelfishing.CruelResourses;
-import com.igorstan.cruelfishing.FiberglassFishingRodItem;
+import com.igorstan.cruelfishing.item.FiberglassFishingRodItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

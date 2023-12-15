@@ -1,12 +1,12 @@
-package com.igorstan.cruelfishing.registry;
+package com.igorstan.cruelfishing.event;
 
 import com.igorstan.cruelfishing.*;
+import com.igorstan.cruelfishing.network.CruelNetworking;
+import com.igorstan.cruelfishing.network.OpenTabletPacket;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

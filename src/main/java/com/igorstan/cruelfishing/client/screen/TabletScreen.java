@@ -1,5 +1,13 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.client.screen;
 
+import com.igorstan.cruelfishing.CruelFishingMod;
+import com.igorstan.cruelfishing.CruelResourses;
+import com.igorstan.cruelfishing.capability.PortfolioCapability;
+import com.igorstan.cruelfishing.capability.StocksInfoCapability;
+import com.igorstan.cruelfishing.client.container.TabletContainer;
+import com.igorstan.cruelfishing.entity.FishEntity;
+import com.igorstan.cruelfishing.network.BuyFishPacket;
+import com.igorstan.cruelfishing.network.CruelNetworking;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -23,7 +31,6 @@ import java.awt.*;
 import java.lang.Math;
 import java.util.Collections;
 import java.util.Vector;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer> {
 

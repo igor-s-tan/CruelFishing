@@ -1,4 +1,4 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.client.container;
 
 import com.igorstan.cruelfishing.registry.CruelContainers;
 import net.minecraft.network.FriendlyByteBuf;

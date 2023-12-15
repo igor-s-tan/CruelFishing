@@ -1,14 +1,11 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.network;
 
+import com.igorstan.cruelfishing.entity.FishEntity;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkHooks;
 
-import java.util.UUID;
 import java.util.function.Supplier;
 
 public class CreateEntityPacket {

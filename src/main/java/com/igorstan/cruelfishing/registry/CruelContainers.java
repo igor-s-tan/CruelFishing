@@ -2,7 +2,7 @@ package com.igorstan.cruelfishing.registry;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
 
-import com.igorstan.cruelfishing.TabletContainer;
+import com.igorstan.cruelfishing.client.container.TabletContainer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;

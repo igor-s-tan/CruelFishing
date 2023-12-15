@@ -1,5 +1,6 @@
-package com.igorstan.cruelfishing;
+package com.igorstan.cruelfishing.capability;
 
+import com.igorstan.cruelfishing.stocks.Portfolio;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
@@ -39,11 +40,13 @@ public class PortfolioCapability implements ICapabilityProvider, INBTSerializabl
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
         createPortfolio().saveNBT(nbt);
+
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
+
         createPortfolio().loadNBT(nbt);
     }
 }
