@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 public class CruelCommonEventsMod {
     @SubscribeEvent
     public static void entityAttributCreation(EntityAttributeCreationEvent event) {
-        event.put(CruelEntities.FLESHRAT.get(), FishEntity.getCruelAttributes().build());
+        event.put(CruelEntities.FLESHRAT_ENTITY.get(), FishEntity.getCruelAttributes().build());
     }
 
     @SubscribeEvent

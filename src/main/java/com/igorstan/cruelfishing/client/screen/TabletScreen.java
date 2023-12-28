@@ -118,8 +118,8 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
         this.addRenderableWidget(sell100);
 
 
-        ImageButton fleshrat = new ImageButton(relX + 5,relY + 5,31, 16, 0, 0, 0, FISH_NAME, 31, 10, (button) -> {
-            displayedFish = CruelEntities.FLESHRAT.get();
+        ImageButton fleshrat = new ImageButton(relX + 5,relY + 5,57, 11, 0, 0, 0, FISH_NAME, 57, 11, (button) -> {
+            displayedFish = CruelEntities.FLESHRAT_ENTITY.get();
         });
 
         this.addRenderableWidget(fleshrat);
@@ -152,7 +152,6 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
     private static void onAccept(Button button) {
         if(displayedFish != null) {
-            System.out.println(displayedFish.getDescriptionId());
             CruelNetworking.INSTANCE.sendToServer(new BuyFishPacket(displayedFish.getDescriptionId(), Integer.valueOf(button.getMessage().getString())));
         }
 
@@ -207,7 +206,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
 
 
-        drawString(pPoseStack, this.font, "Fleshrat", relX + 5, relY + 5, Color.WHITE.getRGB());
+        drawString(pPoseStack, this.font, "FLSH", relX + 7, relY + 7, Color.WHITE.getRGB());
 
 
         this.minecraft.player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {

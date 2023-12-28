@@ -36,15 +36,6 @@ public class CruelNetworking {
 
         INSTANCE.registerMessage(
                 ++id,
-                CreateEntityPacket.class,
-                CreateEntityPacket::toBytes,
-                CreateEntityPacket::new,
-                CreateEntityPacket::handle,
-                Optional.of(NetworkDirection.PLAY_TO_SERVER)
-        );
-
-        INSTANCE.registerMessage(
-                ++id,
                 UpdatePortfolioPacket.class,
                 UpdatePortfolioPacket::toBytes,
                 UpdatePortfolioPacket::new,

@@ -3,33 +3,29 @@ package com.igorstan.cruelfishing;
 import com.igorstan.cruelfishing.client.screen.TabletScreen;
 import com.igorstan.cruelfishing.item.FiberglassFishingRodItem;
 import com.igorstan.cruelfishing.network.CruelNetworking;
-import com.igorstan.cruelfishing.registry.*;
+import com.igorstan.cruelfishing.registry.CruelContainers;
+import com.igorstan.cruelfishing.registry.CruelEntities;
+import com.igorstan.cruelfishing.registry.CruelItems;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 @Mod(CruelFishingMod.MODID)
@@ -38,8 +34,6 @@ public class CruelFishingMod
     public static final String MODID = "cruelfishing";
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-
-    public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
 
     public CruelFishingMod()
     {
@@ -58,21 +52,11 @@ public class CruelFishingMod
 
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::registerTab);
-
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CruelConfig.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        LOGGER.info("HELLO FROM COMMON SETUP");
 
-        if (CruelConfig.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-
-        LOGGER.info(CruelConfig.magicNumberIntroduction + CruelConfig.magicNumber);
-
-        CruelConfig.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
@@ -94,7 +78,7 @@ public class CruelFishingMod
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
-        LOGGER.info("HELLO from server starting");
+
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -103,8 +87,6 @@ public class CruelFishingMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
 
             event.enqueueWork(
                     () -> MenuScreens.register(CruelContainers.TABLET_CONTAINER.get(), TabletScreen::new)

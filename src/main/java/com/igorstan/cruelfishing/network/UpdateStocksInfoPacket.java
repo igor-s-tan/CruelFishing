@@ -34,7 +34,7 @@ public class UpdateStocksInfoPacket {
             }
             StocksInfo stocksInfo = mc.level.getCapability(StocksInfoCapability.STOCKS_INFO).orElseThrow(() -> new IllegalArgumentException());
             stocksInfo.loadNBT(this.nbt);
-            System.out.println("Packet Handled! " + stocksInfo.getPrices(CruelEntities.FLESHRAT.get().getDescriptionId()));
+            System.out.println("Packet Handled! " + stocksInfo.getPrices(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId()));
         });
 
         ctx.setPacketHandled(true);

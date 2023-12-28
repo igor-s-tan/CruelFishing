@@ -69,7 +69,7 @@ public class FishEntity extends LivingEntity {
                 this.setMoveToFisherman(null);
                 if(!level.isClientSide) {
                     player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
-                        portfolio.addAmount(CruelEntities.FLESHRAT.get().getDescriptionId(), 1);
+                        portfolio.addAmount(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId(), 1);
                         CompoundTag nbt = new CompoundTag();
                         portfolio.saveNBT(nbt);
                         CruelNetworking.sendToClient(new UpdatePortfolioPacket(nbt), player);

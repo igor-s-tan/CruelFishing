@@ -24,7 +24,7 @@ public class StocksInfo {
 
         this.stocksInfoMap = new HashMap<>();
 
-        this.stocksInfoMap.put(CruelEntities.FLESHRAT.get().getDescriptionId(), new Pair<>(vector, 1));
+        this.stocksInfoMap.put(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId(), new Pair<>(vector, 1));
         this.stocksInfoMap.put("HumanStock", new Pair<>(vector, 120));
     }
 

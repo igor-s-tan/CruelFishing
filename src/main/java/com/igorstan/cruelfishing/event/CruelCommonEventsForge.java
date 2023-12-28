@@ -50,13 +50,13 @@ public class CruelCommonEventsForge {
                 event.level.getCapability(StocksInfoCapability.STOCKS_INFO).ifPresent(stocksInfo -> {
                     Random rand = new Random();
                     int vol = rand.nextInt(500);
-                    if (stocksInfo.getVolatility(CruelEntities.FLESHRAT.get().getDescriptionId()) >= vol) {
-                        Vector<Float> prices = stocksInfo.getPrices(CruelEntities.FLESHRAT.get().getDescriptionId());
+                    if (stocksInfo.getVolatility(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId()) >= vol) {
+                        Vector<Float> prices = stocksInfo.getPrices(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId());
                         int sign = 1;
                         if (rand.nextBoolean()) {
                             sign = -1;
                         }
-                        stocksInfo.addPrice(CruelEntities.FLESHRAT.get().getDescriptionId(), prices.get(prices.size() - 1) + sign * rand.nextFloat(prices.get(prices.size() - 1) / 2));
+                        stocksInfo.addPrice(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId(), prices.get(prices.size() - 1) + sign * rand.nextFloat(prices.get(prices.size() - 1) / 2));
                         for (Player player : event.level.players()) {
                             player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
                                 CompoundTag nbt = new CompoundTag();
