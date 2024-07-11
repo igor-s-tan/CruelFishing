@@ -2,6 +2,7 @@ package com.igorstan.cruelfishing.client.screen;
 
 import com.igorstan.cruelfishing.CruelFishingMod;
 import com.igorstan.cruelfishing.CruelResourses;
+import com.igorstan.cruelfishing.Fishes;
 import com.igorstan.cruelfishing.capability.PortfolioCapability;
 import com.igorstan.cruelfishing.capability.StocksInfoCapability;
 import com.igorstan.cruelfishing.client.container.TabletContainer;
@@ -119,7 +120,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
 
         ImageButton fleshrat = new ImageButton(relX + 5,relY + 5,57, 11, 0, 0, 0, FISH_NAME, 57, 11, (button) -> {
-            displayedFish = CruelEntities.FLESHRAT_ENTITY.get();
+            displayedFish = Fishes.FLESHRAT.getEntityObject().get();
         });
 
         this.addRenderableWidget(fleshrat);

@@ -1,6 +1,7 @@
 package com.igorstan.cruelfishing.stocks;
 
 import com.igorstan.cruelfishing.CruelResourses;
+import com.igorstan.cruelfishing.Fishes;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.nbt.CompoundTag;
 
@@ -16,7 +17,7 @@ public class Portfolio {
 
     public Portfolio() {
         this.portfolioMap = new HashMap<>();
-        this.portfolioMap.put(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId(), 0);
+        this.portfolioMap.put(Fishes.FLESHRAT.getEntityObject().get().getDescriptionId(), 0);
         this.netWorth = 0.0D;
     }
 

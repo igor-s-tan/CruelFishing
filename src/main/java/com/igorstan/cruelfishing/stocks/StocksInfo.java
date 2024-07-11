@@ -1,6 +1,7 @@
 package com.igorstan.cruelfishing.stocks;
 
 import com.igorstan.cruelfishing.CruelResourses;
+import com.igorstan.cruelfishing.Fishes;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import net.minecraft.nbt.CompoundTag;
 import org.antlr.v4.runtime.misc.Pair;
@@ -24,7 +25,7 @@ public class StocksInfo {
 
         this.stocksInfoMap = new HashMap<>();
 
-        this.stocksInfoMap.put(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId(), new Pair<>(vector, 1));
+        this.stocksInfoMap.put(Fishes.FLESHRAT.getEntityObject().get().getDescriptionId(), new Pair<>(vector, 12));
         this.stocksInfoMap.put("HumanStock", new Pair<>(vector, 120));
     }
 

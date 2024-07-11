@@ -1,5 +1,7 @@
 package com.igorstan.cruelfishing.entity;
 
+import com.igorstan.cruelfishing.CruelResourses;
+import com.igorstan.cruelfishing.Fishes;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import com.mojang.logging.LogUtils;
 import java.util.Collections;
@@ -101,7 +103,7 @@ public class FiberglassFishingHookEntity extends FishingHook {
         this.setXRot((float)(Mth.atan2(vec3.y, vec3.horizontalDistance()) * (double)(180F / (float)Math.PI)));
         this.yRotO = this.getYRot();
         this.xRotO = this.getXRot();
-        fishEntity = CruelEntities.FLESHRAT.get().create(level);
+        fishEntity = Fishes.FLESHRAT.getEntityObject().get().create(level);
 
 
     }
@@ -336,7 +338,7 @@ public class FiberglassFishingHookEntity extends FishingHook {
                 //serverlevel.sendParticles(ParticleTypes.FISHING, this.getX(), d3, this.getZ(), (int)(1.0F + this.getBbWidth() * 20.0F), (double)this.getBbWidth(), 0.0D, (double)this.getBbWidth(), (double)0.2F);
                 this.nibble = 10;
                 this.getEntityData().set(DATA_BITING, true);
-                this.fishEntity = CruelEntities.FLESHRAT.get().create(level);
+                this.fishEntity = Fishes.FLESHRAT.getEntityObject().get().create(level);
                 this.fishEntity.setPos(this.getX(), this.getY()-1.67, this.getZ());
                 this.level.addFreshEntity(fishEntity);
             }

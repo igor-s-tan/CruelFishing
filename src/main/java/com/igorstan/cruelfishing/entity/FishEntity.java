@@ -1,6 +1,7 @@
 package com.igorstan.cruelfishing.entity;
 
 import com.igorstan.cruelfishing.CruelResourses;
+import com.igorstan.cruelfishing.Fishes;
 import com.igorstan.cruelfishing.capability.PortfolioCapability;
 import com.igorstan.cruelfishing.network.CruelNetworking;
 import com.igorstan.cruelfishing.network.UpdatePortfolioPacket;
@@ -69,7 +70,7 @@ public class FishEntity extends LivingEntity {
                 this.setMoveToFisherman(null);
                 if(!level.isClientSide) {
                     player.getCapability(PortfolioCapability.PORTFOLIO).ifPresent(portfolio -> {
-                        portfolio.addAmount(CruelEntities.FLESHRAT_ENTITY.get().getDescriptionId(), 1);
+                        portfolio.addAmount(Fishes.FLESHRAT.getEntityObject().get().getDescriptionId(), 1);
                         CompoundTag nbt = new CompoundTag();
                         portfolio.saveNBT(nbt);
                         CruelNetworking.sendToClient(new UpdatePortfolioPacket(nbt), player);

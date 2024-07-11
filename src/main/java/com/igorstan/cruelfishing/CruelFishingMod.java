@@ -28,6 +28,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
+import java.util.Arrays;
+
 @Mod(CruelFishingMod.MODID)
 public class CruelFishingMod
 {
@@ -37,13 +39,17 @@ public class CruelFishingMod
 
     public CruelFishingMod()
     {
+
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
 
         modEventBus.addListener(this::commonSetup);
 
         BLOCKS.register(modEventBus);
         CruelItems.CRUEL_ITEMS.register(modEventBus);
+        CruelEntities.init();
         CruelEntities.CRUEL_ENTITIES.register(modEventBus);
+
         CruelContainers.CRUEL_CONTAINERS.register(modEventBus);
         CruelNetworking.init();
 
