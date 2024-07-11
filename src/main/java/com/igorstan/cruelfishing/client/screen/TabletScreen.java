@@ -120,7 +120,7 @@ public class TabletScreen extends EffectRenderingInventoryScreen<TabletContainer
 
 
         ImageButton fleshrat = new ImageButton(relX + 5,relY + 5,57, 11, 0, 0, 0, FISH_NAME, 57, 11, (button) -> {
-            displayedFish = Fishes.FLESHRAT.getEntityObject().get();
+            displayedFish = Fishes.BIGMAN.getEntityObject().get();
         });
 
         this.addRenderableWidget(fleshrat);
