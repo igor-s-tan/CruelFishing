@@ -219,13 +219,123 @@ public enum Fishes {
         PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(17, 0).addBox(-0.5F, -1.0F, -3.0F, 1.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.5F, -5.25F, -0.5672F, 0.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
+    }),
+    ZOOPER("zooper", "Zooper", "Zoopers follow container ships and make strange noises.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -3.0F, -6.0F, 2.0F, 2.0F, 13.0F, new CubeDeformation(0.0F))
+                .texOffs(16, 16).addBox(-1.0F, -1.0F, -6.0F, 2.0F, 1.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 15).addBox(-1.0F, -4.0F, -6.0F, 2.0F, 1.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(26, 29).addBox(1.0F, -3.0F, -6.0F, 1.0F, 2.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 28).addBox(-2.0F, -3.0F, -6.0F, 1.0F, 2.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -1.0F, -2.0F, 1.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.9145F, -6.7418F, 0.48F, 0.0F, 0.0F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 6).addBox(-0.5F, -1.5F, -2.5F, 1.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.25F, -6.5F, -0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 15).addBox(-0.5F, -1.5F, -1.5F, 1.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -4.0F, -0.5F, -0.7854F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 64, 64);
+    }),
+    CARABINO("carabino", "Carabino", "A deranged combatant beyond help.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -4.0F, -1.0F, 4.0F, 4.0F, 6.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 12).addBox(2.0F, -3.0F, -1.0F, 1.0F, 2.0F, 7.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 10).addBox(-3.0F, -3.0F, -1.0F, 1.0F, 2.0F, 7.0F, new CubeDeformation(0.0F))
+                .texOffs(14, 0).addBox(-2.0F, -3.0F, 5.0F, 4.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 21).addBox(-3.0F, -3.0F, -2.0F, 6.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(18, 19).addBox(1.5F, -3.5F, -1.5F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 19).addBox(-2.5F, -3.5F, -1.5F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
+                .texOffs(22, 8).addBox(-1.5F, -3.5F, 4.5F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(18, 11).addBox(1.5F, -1.5F, -1.5F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
+                .texOffs(13, 3).addBox(-2.5F, -1.5F, -1.5F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
+                .texOffs(22, 6).addBox(-1.5F, -1.5F, 4.5F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(22, 0).addBox(-1.0F, -1.0F, -1.5F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, -3.5F, 0.48F, 0.0F, 0.0F));
+
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 27).addBox(-1.0F, -1.0F, -1.5F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, -3.5F, -0.48F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 64, 64);
+    }),
+    MOONFISH("moonfish", "Moonfish", "A beautiful fish known for its use in chemical weapons.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 8.0F, 6.0F, new CubeDeformation(0.0F))
+                .texOffs(10, 0).addBox(-1.0F, -8.0F, -4.6F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(10, 4).addBox(-2.0F, -4.5F, 4.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 0).addBox(1.0F, -4.5F, 4.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 12).addBox(-1.0F, -2.0F, -1.0F, 0.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -4.25F, -7.25F, -2.0944F, 0.0F, 0.0F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(10, 14).addBox(-1.0F, -2.0F, -1.0F, 0.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -3.25F, -7.25F, -1.1345F, 0.0F, 0.0F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(14, 14).addBox(-1.0F, -2.0F, -1.0F, 0.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.75F, -3.25F, -0.7854F, 0.0F, 0.0F));
+        PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -2.0F, -2.0F, 0.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -7.25F, -3.0F, -0.7854F, 0.0F, 0.0F));
+        PartDefinition cube_r5 = bb_main.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 24).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -4.0F, -5.0F, -0.7854F, 0.0F, 0.0F));
+        PartDefinition cube_r6 = bb_main.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(20, 7).addBox(-1.0F, -1.0F, -2.5F, 2.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -5.5F, -5.65F, 0.7854F, 0.0F, 0.0F));
+        PartDefinition cube_r7 = bb_main.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(0, 16).addBox(-1.0F, -1.0F, -3.0F, 2.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.8536F, -5.4536F, -0.7854F, 0.0F, 0.0F));
+        PartDefinition cube_r8 = bb_main.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(16, 16).addBox(-1.0F, -2.0F, -2.5F, 2.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -4.0F, 2.0F, -0.7418F, 0.0F, 0.0F));
+        PartDefinition cube_r9 = bb_main.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(16, 0).addBox(-1.0F, -1.0F, -2.5F, 2.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.0309F, 3.7935F, 0.48F, 0.0F, 0.0F));
+        PartDefinition cube_r10 = bb_main.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(9, 7).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -6.6F, 2.2F, -0.6545F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 64, 64);
+    }),
+    EEL("eel", "Eel", "Snakelike slippery fish that loves the rain.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(7, 0).addBox(0.0F, -5.6F, -5.1F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(4, 0).addBox(0.0F, 0.0F, -2.0F, 1.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.6F, -3.0F, 2.5F, 0.3578F, -0.538F, -0.1893F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -2.0F, 1.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -3.0F, 3.0F, 0.3578F, 0.538F, 0.1893F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 11).addBox(0.0F, -1.0F, -1.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.7F, -8.3F, -0.2618F, 0.0F, 0.0F));
+        PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(6, 6).addBox(-1.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -4.3F, -5.5F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r5 = bb_main.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -0.9F, -5.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -2.3F, 1.8F, -0.5236F, 0.0F, 0.0F));
+        PartDefinition cube_r6 = bb_main.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 6).addBox(-1.0F, -0.9F, -4.0F, 1.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -3.5F, 5.5F, 0.3054F, 0.0F, 0.0F));
+        PartDefinition cube_r7 = bb_main.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(7, 10).addBox(0.0F, -1.0F, -3.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, 8.0F, -0.1309F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 16, 16);
+    }),
+    FLOUNDER("flounder", "Flounder", "Deformed by sin. A cowardly fish.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -1.0F, 1.0F, 6.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(4, 7).addBox(0.0F, -5.5F, 1.0F, 1.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(6, 0).addBox(0.0F, -5.5F, -3.0F, 1.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(10, 5).addBox(0.0F, -5.0F, 3.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 12).addBox(0.0F, -4.5F, -5.0F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(12, 0).addBox(-1.0F, -3.6F, -2.9F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 10).addBox(-1.0F, -5.4F, -1.1F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 8).addBox(-1.0F, -4.9F, -2.9F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(2, 0).addBox(-1.0F, -1.0F, -1.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.55F, -2.2F, -0.1F, -0.5314F, 0.5844F, -0.3136F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(4, 0).addBox(-1.0F, -1.0F, -1.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.25F, -1.9F, 0.5F, -0.5314F, -0.5844F, 0.3136F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(10, 8).addBox(0.0F, -0.5F, -1.5F, 0.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -2.5F, 5.75F, -0.3927F, 0.0F, 0.0F));
+        PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(10, 10).addBox(0.0F, -0.5F, -1.5F, 0.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -4.5F, 5.5F, 0.3927F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 32, 32);
+    }),
+    GIGAFLOUNDER("gigaflounder", "Gigaflounder", "Deformed by power. A wrathful fish.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -1.0F, 1.0F, 6.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(4, 7).addBox(0.0F, -5.5F, 1.0F, 1.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(6, 0).addBox(0.0F, -5.5F, -3.0F, 1.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(10, 5).addBox(0.0F, -5.0F, 3.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 12).addBox(0.0F, -4.5F, -5.0F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(12, 0).addBox(-1.0F, -3.6F, -2.9F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 10).addBox(-1.0F, -5.4F, -1.1F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 8).addBox(-1.0F, -4.9F, -2.9F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(2, 0).addBox(-1.0F, -1.0F, -1.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.55F, -2.2F, -0.1F, -0.5314F, 0.5844F, -0.3136F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(4, 0).addBox(-1.0F, -1.0F, -1.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.25F, -1.9F, 0.5F, -0.5314F, -0.5844F, 0.3136F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(10, 8).addBox(0.0F, -0.5F, -1.5F, 0.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -2.5F, 5.75F, -0.3927F, 0.0F, 0.0F));
+        PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(10, 10).addBox(0.0F, -0.5F, -1.5F, 0.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -4.5F, 5.5F, 0.3927F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 32, 32);
     });
-//        ZOOPER("zooper", "Zooper", "Zoopers follow container ships and make strange noises.", () -> {}),
-//        CARABINO("carabino", "Carabino", "A deranged combatant beyond help.", () -> {}),
-//        MOONFISH("moonfish", "Moonfish", "A beautiful fish known for its use in chemical weapons.", () -> {}),
-//        EEL("eel", "Eel", "Snakelike slippery fish that loves the rain.", () -> {}),
-//        FLOUNDER("flounder", "Flounder", "Deformed by sin. A cowardly fish.", () -> {}),
-//        GIGAFLOUNDER("gigaflounder", "Gigaflounder", "Deformed by power. A wrathful fish.", () -> {}),
 //        BLURPO("blurpo", "Blurpo", "Blurpo is the smelliest saltwater fish on the market, an acquired taste.", () -> {}),
 //        HYDRA("hydra", "Hydra", "God among fish.", () -> {}),
 //        PSYCHOFISH("psychofish", "Psychofish", "Saps the psychic energies of nearby humans.", () -> {}),
