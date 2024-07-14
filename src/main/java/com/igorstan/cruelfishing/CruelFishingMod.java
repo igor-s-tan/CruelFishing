@@ -47,7 +47,7 @@ public class CruelFishingMod
 
         BLOCKS.register(modEventBus);
         CruelItems.CRUEL_ITEMS.register(modEventBus);
-        CruelEntities.init();
+        CruelEntities.initFishes();
         CruelEntities.CRUEL_ENTITIES.register(modEventBus);
 
         CruelContainers.CRUEL_CONTAINERS.register(modEventBus);

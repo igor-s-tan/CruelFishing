@@ -23,7 +23,7 @@ public class CruelEntities {
 
     public static final DeferredRegister<EntityType<?>> CRUEL_ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
 
-    public static void init() {
+    public static void initFishes() {
         for(Fishes fish: Fishes.values()) {
             fish.setEntityObject(CRUEL_ENTITIES.register(fish.getName(), () -> createEntityType(FishEntity::new, EntityDimensions.scalable(1.0f, 1.0f))));
         }
