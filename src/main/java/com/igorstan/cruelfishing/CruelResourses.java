@@ -33,4 +33,6 @@ public class CruelResourses {
     private static Component registerComponent(String name) {
         return Component.translatable(name);
     }
+
+    public static ResourceLocation FishLootTable = registerResource("gameplay/fishing");
 }

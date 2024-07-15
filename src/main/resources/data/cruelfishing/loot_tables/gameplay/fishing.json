@@ -1,0 +1,25 @@
+{
+  "pools": [
+    {
+      "name": "fishing",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "entity",
+          "name": "cruelfishing:fleshrat",
+          "weight": 25
+        },
+        {
+          "type": "entity",
+          "name": "cruelfishing:fleshrat",
+          "weight": 10
+        },
+        {
+          "type": "entity",
+          "name": "cruelfishing:fleshrat",
+          "weight": 65
+        }
+      ]
+    }
+  ]
+}

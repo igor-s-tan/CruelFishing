@@ -1,12 +1,18 @@
 package com.igorstan.cruelfishing.entity;
 
+import com.ibm.icu.impl.LocaleDisplayNamesImpl;
+import com.igorstan.cruelfishing.CruelFishingMod;
 import com.igorstan.cruelfishing.CruelResourses;
 import com.igorstan.cruelfishing.Fishes;
 import com.igorstan.cruelfishing.registry.CruelEntities;
 import com.mojang.logging.LogUtils;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nullable;
+
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -29,12 +35,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.EntityGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.entity.EntityTickList;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -103,9 +112,8 @@ public class FiberglassFishingHookEntity extends FishingHook {
         this.setXRot((float)(Mth.atan2(vec3.y, vec3.horizontalDistance()) * (double)(180F / (float)Math.PI)));
         this.yRotO = this.getYRot();
         this.xRotO = this.getXRot();
-        fishEntity = Fishes.BRIMSTONE.getEntityObject().get().create(level);
 
-
+        fishEntity = Fishes.FLESHRAT.getEntityObject().get().create(level);
     }
 
 
@@ -338,7 +346,17 @@ public class FiberglassFishingHookEntity extends FishingHook {
                 //serverlevel.sendParticles(ParticleTypes.FISHING, this.getX(), d3, this.getZ(), (int)(1.0F + this.getBbWidth() * 20.0F), (double)this.getBbWidth(), 0.0D, (double)this.getBbWidth(), (double)0.2F);
                 this.nibble = 10;
                 this.getEntityData().set(DATA_BITING, true);
-                this.fishEntity = Fishes.BRIMSTONE.getEntityObject().get().create(level);
+
+                LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel)this.level)).withParameter(LootContextParams.ORIGIN, this.position()).withParameter(LootContextParams.TOOL, this.getPlayerOwner().getMainHandItem()).withParameter(LootContextParams.THIS_ENTITY, this);
+                lootcontext$builder.withParameter(LootContextParams.KILLER_ENTITY, this.getOwner()).withParameter(LootContextParams.THIS_ENTITY, this);
+                LootTable loottable = this.level.getServer().getLootTables().get(CruelResourses.FishLootTable);
+                List<ItemStack> list = loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.FISHING));
+
+                for(ItemStack stack: list) {
+                    System.out.println(stack.getDescriptionId());
+                }
+
+                this.fishEntity = Fishes.BOUNCY_CASTLE.getEntityObject().get().create(level);
                 this.fishEntity.setPos(this.getX(), this.getY()-1.67, this.getZ());
                 this.level.addFreshEntity(fishEntity);
             }
@@ -445,7 +463,7 @@ public class FiberglassFishingHookEntity extends FishingHook {
             } else if (this.nibble > 0) {
                 LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel)this.level)).withParameter(LootContextParams.ORIGIN, this.position()).withParameter(LootContextParams.TOOL, pStack).withParameter(LootContextParams.THIS_ENTITY, this).withRandom(this.random).withLuck((float)this.luck + player.getLuck());
                 lootcontext$builder.withParameter(LootContextParams.KILLER_ENTITY, this.getOwner()).withParameter(LootContextParams.THIS_ENTITY, this);
-                LootTable loottable = this.level.getServer().getLootTables().get(BuiltInLootTables.FISHING);
+                LootTable loottable = this.level.getServer().getLootTables().get(CruelResourses.FishLootTable);
                 List<ItemStack> list = loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.FISHING));
                 event = new net.minecraftforge.event.entity.player.ItemFishedEvent(list, this.onGround ? 2 : 1, this);
                 net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
@@ -454,20 +472,6 @@ public class FiberglassFishingHookEntity extends FishingHook {
                     return event.getRodDamage();
                 }
                 CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayer)player, pStack, this, list);
-
-//                for(ItemStack itemstack : list) {
-//                    ItemEntity itementity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), itemstack);
-//                    double d0 = player.getX() - this.getX();
-//                    double d1 = player.getY() - this.getY();
-//                    double d2 = player.getZ() - this.getZ();
-//                    double d3 = 0.1D;
-//                    itementity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
-//                    this.level.addFreshEntity(itementity);
-//                    player.level.addFreshEntity(new ExperienceOrb(player.level, player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(6) + 1));
-//                    if (itemstack.is(ItemTags.FISHES)) {
-//                        player.awardStat(Stats.FISH_CAUGHT, 1);
-//                    }
-//                }
 
                 this.fishEntity.setMoveToFisherman(this.getPlayerOwner());
 
