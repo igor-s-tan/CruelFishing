@@ -893,11 +893,97 @@ public enum Fishes {
         PartDefinition cube_r8 = bb_main.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(15, 7).addBox(-3.0F, -2.0F, 0.0F, 6.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.0F, -0.5F, 0.0F, 0.0F, -0.4363F));
 
         return LayerDefinition.create(meshdefinition, 32, 32);
+    }),
+    SLURPER("slurper", "Slurper", "Come on that's disgusting. Who would want that?", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(5, 5).addBox(0.0F, -1.0F, -1.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.3F, -3.7F, -5.3F, -0.2618F, 0.0F, 0.0F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 5).addBox(-1.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -4.2F, -2.2F, 0.4396F, -0.1186F, -0.0556F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(6, 0).addBox(-1.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.8F, -4.6F, -0.05F, 0.0F, 0.2618F, 0.0F));
+        PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -0.9F, -5.0F, 1.0F, 1.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -2.3F, 4.8F, -0.5236F, 0.0F, 0.0F));
+        PartDefinition cube_r5 = bb_main.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(7, 8).addBox(-2.0F, -1.9F, -4.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, -3.85F, 7.5F, 0.3054F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 16, 16);
+    }),
+    PIPER("piper", "Piper", "Makes the sound of water rushing through plumbing.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(13, 17).addBox(1.0F, -5.6F, -5.1F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(15, 13).addBox(1.0F, -7.6F, -5.1F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(15, 5).addBox(2.0F, -6.6F, -5.1F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(10, 12).addBox(0.0F, -6.6F, -5.1F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 10).addBox(-1.0F, -2.0F, -1.0F, 0.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -7.0F, -0.75F, -0.6981F, 0.0F, 0.0F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(5, 1).addBox(1.0F, -1.0F, -1.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.95F, -5.6F, 3.5F, -0.1745F, 0.0F, 0.0F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(10, 4).addBox(1.0F, -0.9F, -5.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -6.6F, 4.9F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(5, 5).addBox(1.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 8).addBox(3.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -4.8F, -0.7F, -0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r5 = bb_main.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(10, 8).addBox(1.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(15, 1).addBox(3.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -5.3F, -5.5F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r6 = bb_main.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 0).addBox(1.0F, -1.0F, -1.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.05F, -5.6F, 3.4F, -0.1745F, 0.0F, 0.0F));
+        PartDefinition cube_r7 = bb_main.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(3, 13).addBox(1.0F, -0.9F, -5.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -6.6F, 4.9F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r8 = bb_main.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(15, 9).addBox(0.0F, -0.9F, -5.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -7.6F, 4.9F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r9 = bb_main.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(5, 9).addBox(0.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -5.8F, -0.7F, -0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r10 = bb_main.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(8, 16).addBox(0.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -6.3F, -5.5F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r11 = bb_main.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(0, 4).addBox(0.0F, -1.0F, -1.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.05F, -6.6F, 3.4F, -0.1745F, 0.0F, 0.0F));
+        PartDefinition cube_r12 = bb_main.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(20, 0).addBox(0.0F, -1.0F, -1.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.05F, -4.6F, 3.8F, -0.1745F, 0.0F, 0.0F));
+        PartDefinition cube_r13 = bb_main.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(10, 0).addBox(0.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -3.8F, -0.7F, -0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r14 = bb_main.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(0, 17).addBox(0.0F, -1.0F, -2.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -4.3F, -5.5F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition cube_r15 = bb_main.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(18, 18).addBox(0.0F, -0.9F, -5.0F, 1.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -5.6F, 4.9F, 0.4363F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 32, 32);
+    }),
+    BOGDO("bogdo", "Bogdo", "Emerges from the deep in the swamp and makes disgusting grunting sounds. Eats corpses.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(9, 9).addBox(-2.0F, -7.0F, 3.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 3).addBox(-2.0F, -5.5F, 1.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 6).addBox(-2.0F, -6.0F, -1.25F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 0).addBox(-2.0F, -4.75F, -4.25F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 12).addBox(-1.5F, -4.0F, -6.25F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(13, 15).addBox(-3.0F, -5.0F, -0.25F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(15, 0).addBox(1.0F, -5.0F, -0.25F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(8, 12).addBox(-0.5F, -7.0F, -1.25F, 0.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(12, 1).addBox(-0.25F, -6.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 0).addBox(-1.75F, -6.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 32, 32);
+    }),
+    SUPER_BOGDO("super_bogdo", "Super Bogdo", "A terrifying scream reverberates over the swamplands. It's Super Bogdo. Eats bogdos.", () -> {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 0).addBox(-0.5F, -7.0F, -1.25F, 0.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 15).addBox(-2.0F, -7.0F, 3.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 12).addBox(-2.0F, -5.5F, 1.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 9).addBox(-2.0F, -6.0F, -1.25F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 3).addBox(-2.0F, -4.75F, -4.25F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 18).addBox(-1.5F, -4.0F, -6.25F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(21, 17).addBox(-3.0F, -5.0F, -0.25F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(15, 21).addBox(1.0F, -5.0F, -0.25F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(21, 13).addBox(-0.25F, -6.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(21, 11).addBox(-1.75F, -6.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 6).addBox(-4.5F, -9.0F, 3.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 0).addBox(0.5F, -9.0F, 3.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(11, 21).addBox(-2.75F, -8.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(7, 21).addBox(-4.25F, -8.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(21, 6).addBox(2.25F, -8.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(15, 0).addBox(0.75F, -8.5F, 6.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(17, 0).addBox(1.0F, -10.0F, 4.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 0).addBox(-4.0F, -10.0F, 4.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(18, 4).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, -3.0F, -3.5F, 0.0F, 0.0F, -0.6109F));
+        PartDefinition cube_r2 = bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(18, 9).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -3.0F, -3.5F, 0.0F, 0.0F, 0.6109F));
+        PartDefinition cube_r3 = bb_main.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(18, 15).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.25F, -8.0F, 4.5F, 0.0F, 0.0F, 0.6109F));
+        PartDefinition cube_r4 = bb_main.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(20, 20).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.25F, -8.0F, 4.5F, 0.0F, 0.0F, -0.6109F));
+
+        return LayerDefinition.create(meshdefinition, 32, 32);
     });
-//        SLURPER("slurper", "Slurper", "Come on that's disgusting. Who would want that?", () -> {}),
-//        PIPER("piper", "Piper", "Makes the sound of water rushing through plumbing.", () -> {}),
-//        BOGDO("bogdo", "Bogdo", "Emerges from the deep in the swamp and makes disgusting grunting sounds. Eats corpses.", () -> {}),
-//        SUPER_BOGDO("super_bogdo", "Super Bogdo", "A terrifying scream reverberates over the swamplands. It's Super Bogdo. Eats bogdos.", () -> {}),
 //        SWAMPSUCKER("swampsucker", "Swampsucker", "Unlike the benign poolsucker, this one only eats human flesh.", () -> {}),
 //        SPIKER("spiker", "Spiker", "The spikes are hard enough to go through protective steel plates. Popular as a booby trap.", () -> {}),
 //        GUNK_EEL("gunk_eel", "Gunk Eel", "Covered in thick odorous hallucinogenic paste.", () -> {}),
